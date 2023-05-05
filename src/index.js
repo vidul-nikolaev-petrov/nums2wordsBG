@@ -79,8 +79,7 @@ function nums2wordsBG(number) {
                         round += roundTmp;
                     }
                 }
-                console.log("R:", round, num, n, " >> ", roundTmp);
-
+                
                 return getName(round).concat(getName(n - round));
             };
 
