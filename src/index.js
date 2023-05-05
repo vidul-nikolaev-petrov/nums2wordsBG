@@ -140,11 +140,13 @@ function nums2wordsBG(number) {
                 })();
 
                 (function specialCases() {
-                    const replace = { две: "два", едно: "един" };
+                    const replace = { две: "два", едно: "един", едно: "една" };
 
                     result.forEach((e, i) => {
                         if (e === "милиона" || e === "милиарда") {
                             if (replace[result[i - 1]]) result[i - 1] = replace[result[i - 1]];
+                        } else if (e === "хиляди" && result[i - 1] === "едно") {
+                            result[i - 1] = replace[result[i - 1]];
                         }
                     });
                 })();
