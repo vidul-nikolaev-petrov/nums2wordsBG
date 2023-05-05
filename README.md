@@ -1,2 +1,2 @@
 # nums2wordsBG
-Translates numbers to words in Bulgarian.
+### Converts numbers from numeric to verbal in Bulgarian
