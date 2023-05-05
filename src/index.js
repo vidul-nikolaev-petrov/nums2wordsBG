@@ -73,13 +73,13 @@ function nums2wordsBG(number) {
 
                 let roundTmp;
                 let round = n - (n % 10 ** (getLength() - 1));
-                if ( round / 10 ** (countDigits(round) - 1) === 1) {
+                if (round / 10 ** (countDigits(round) - 1) === 1) {
                     roundTmp = Math.floor((n % round) / (round / 10)) * (round / 10);
                     if (round + roundTmp < n) {
                         round += roundTmp;
                     }
                 }
-                
+
                 return getName(round).concat(getName(n - round));
             };
 
@@ -127,6 +127,16 @@ function nums2wordsBG(number) {
                     }
 
                     result = result.concat(tmp);
+                })();
+
+                (function specialCases() {
+                    const replace = { две: "два", едно: "един" };
+
+                    result.forEach((e, i) => {
+                        if (e === "милиона" || e === "милиарда") {
+                            if (replace[result[i - 1]]) result[i - 1] = replace[result[i - 1]];
+                        }
+                    });
                 })();
 
                 return result;
