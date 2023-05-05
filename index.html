@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number to Words Example</title>
+        <meta charset="UTF-8" />
+        <script src="src/index.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Didact Gothic" rel="stylesheet" />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                font-family: "Didact Gothic";
+            }
+
+            #container {
+                position: fixed;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+
+            #label {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            #input {
+                padding: 10px;
+                font-size: 16px;
+                border: 2px solid gray;
+                border-radius: 4px;
+            }
+
+            #output {
+                margin-top: 40px;
+                font-size: 24px;
+                text-align: center;
+            }
+
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <label for="input" id="label">Въведете номер:</label>
+            <input type="number" id="input" onkeyup="outputNumber()" />
+        </div>
+        <p id="output"></p>
+        <script>
+            function outputNumber() {
+                const inputElement = document.getElementById("input");
+                const outputElement = document.getElementById("output");
+                const number = inputElement.value;
+                if (number) {
+                    outputElement.innerHTML = nums2wordsBG(number);
+                } else {
+                    outputElement.innerHTML = "";
+                }
+            }
+
+            window.onload = function () {
+                document.getElementById("input").focus();
+            };
+        </script>
+    </body>
+</html>

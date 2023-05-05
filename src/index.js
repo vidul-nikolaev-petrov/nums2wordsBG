@@ -73,12 +73,13 @@ function nums2wordsBG(number) {
 
                 let roundTmp;
                 let round = n - (n % 10 ** (getLength() - 1));
-                if (Math.floor(round / 10000)) {
+                if ( round / 10 ** (countDigits(round) - 1) === 1) {
                     roundTmp = Math.floor((n % round) / (round / 10)) * (round / 10);
                     if (round + roundTmp < n) {
                         round += roundTmp;
                     }
                 }
+                console.log("R:", round, num, n, " >> ", roundTmp);
 
                 return getName(round).concat(getName(n - round));
             };
@@ -198,9 +199,10 @@ function nums2wordsBG(number) {
     };
 
     if (!number) {
-        return (nums2wordsBG.numbers = nums);
+        nums2wordsBG.numbers = nums;
+    } else {
+        return nums.translate(number);
     }
-    return nums.translate(number);
 }
 
 nums2wordsBG(); // init nums for later settings
