@@ -4,6 +4,10 @@ function nums2wordsBG(number) {
             const union = "и";
             const num = _num.toString();
             const getRegExp = (num) => () => new RegExp("^(\\d+)0{" + num + "}$");
+            const countDigits = (number, count = 0) => {
+                if (!number) return count;
+                return countDigits(Math.floor(number / 10), ++count);
+            };
             const regexp = {
                 4: getRegExp(3),
                 5: getRegExp(3),
@@ -30,7 +34,7 @@ function nums2wordsBG(number) {
 
             const getName = (n) => {
                 const firstIntegers = getFirstIntegers(n);
-                const getLength = () => n.toString().length;
+                const getLength = () => countDigits(n);
                 const getPlural = () => this[getLength()]["*"];
 
                 let result = [];
@@ -59,7 +63,7 @@ function nums2wordsBG(number) {
                 }
 
                 function getLeadingNums() {
-                    const offset = String(num).length - String(n).length;
+                    const offset = countDigits(num) - countDigits(n);
                     const result = String(num).slice(offset);
                     return result;
                 }
@@ -201,6 +205,6 @@ function nums2wordsBG(number) {
 
 nums2wordsBG(); // init nums for later settings
 
-// quick check:
+// // quick check:
 // const log = (e) => console.log(nums2wordsBG(e));
-// [1, 8, 16, 32, 128, 256, 1024, 12021, 20048, 400960, 801920, 800008, 256512641, 550660128, 901999000].forEach(log);
+// [1, 8, 16, 32, 128, 256, 1024, 12021, 20048, 400960, 801920, 800008, 550660128, 901999000].forEach(log);
