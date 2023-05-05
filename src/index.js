@@ -15,6 +15,9 @@ function nums2wordsBG(number) {
                 7: getRegExp(6),
                 8: getRegExp(6),
                 9: getRegExp(6),
+                10: getRegExp(9),
+                11: getRegExp(9),
+                12: getRegExp(9),
             };
 
             const getFirstIntegers = (n) => {
@@ -87,7 +90,14 @@ function nums2wordsBG(number) {
 
             function applyUnions(words) {
                 let result = [];
-                const keyWords = { хиляда: true, хиляди: true, милион: true, милиона: true };
+                const keyWords = {
+                    хиляда: true,
+                    хиляди: true,
+                    милион: true,
+                    милиона: true,
+                    милиард: true,
+                    милиарда: true,
+                };
 
                 for (let i = 0; i < words.length; i++) {
                     const e = words[i];
@@ -204,6 +214,19 @@ function nums2wordsBG(number) {
         },
         9: {
             "*": "милиона",
+        },
+        10: {
+            1000000000: ["един милиард", "един милиарда"],
+            "*": "милиарда",
+        },
+        11: {
+            "*": "милиарда",
+        },
+        11: {
+            "*": "милиарда",
+        },
+        12: {
+            "*": "милиарда",
         },
     };
 
