@@ -1,93 +1,61 @@
 function nums2wordsBG(number) {
     const nums = {
-        translate: function (_num) {
+        translate: function (num) {
             const union = "и";
-            const num = _num.toString();
-            const getRegExp = (num) => () => new RegExp("^(\\d+)0{" + num + "}$");
             const countDigits = (number, count = 0) => {
                 if (!number) return count;
                 return countDigits(Math.floor(number / 10), ++count);
             };
-            const regexp = {
-                4: getRegExp(3),
-                5: getRegExp(3),
-                6: getRegExp(3),
-                7: getRegExp(6),
-                8: getRegExp(6),
-                9: getRegExp(6),
-                10: getRegExp(9),
-                11: getRegExp(9),
-                12: getRegExp(9),
-            };
 
-            const getFirstIntegers = (n) => {
-                const num = n.toString();
+            function _translate(number) {
+                const numbers = Number(number).toLocaleString("en-US").split(",");
+                const getIndex = (list, i) => list.length - i + 2;
 
-                try {
-                    const pattern = regexp[num.length];
-                    const match = num.match(pattern());
+                let result = [],
+                    match,
+                    index,
+                    ones;
 
-                    if (!match) throw new Error();
+                numbers.forEach((e, i) => {
+                    ones = e % 100 === 1;
+                    index = getIndex(numbers, i);
 
-                    return match[1];
-                } catch {
-                    return;
-                }
-            };
+                    e = Number(e);
 
-            const getName = (n) => {
-                const firstIntegers = getFirstIntegers(n);
-                const getLength = () => countDigits(n);
-                const getPlural = () => this[getLength()]["*"];
+                    if (!e) return;
 
-                let result = [];
-                let match = this[getLength()][n];
+                    result = result.concat(getName(e));
 
-                if (match) {
-                    if (Array.isArray(match)) {
-                        if (num / 2 > n) {
-                            match = match[1].split(" ");
+                    match = nums[index];
+
+                    if (index > 3) {
+                        if (ones) {
+                            result.pop();
+                            if (e === 1) {
+                                result = result.concat(match[1][0].split(" "));
+                            } else {
+                                result = result.concat(match[1][1].split(" "));
+                            }
                         } else {
-                            match = match[0].split(" ");
+                            result.push(nums[index]["*"]);
                         }
-                        result = result.concat(match);
-                        return result;
                     }
-                    result.push(match);
-                    return result;
-                }
+                });
 
-                if (firstIntegers) {
-                    if (startsWith()) {
-                        return getName(firstIntegers).concat(getPlural());
-                    } else {
-                        return getName(firstIntegers);
-                    }
-                }
+                return result;
 
-                function getLeadingNums() {
-                    const offset = countDigits(num) - countDigits(n);
-                    const result = String(num).slice(offset);
-                    return result;
-                }
-                function startsWith() {
-                    return getLeadingNums().startsWith(String(firstIntegers));
-                }
+                function getName(n) {
+                    let match = nums[countDigits(n)][n];
 
-                let roundTmp;
-                let round = n - (n % 10 ** (getLength() - 1));
-                let counter = countDigits(round);
-                if (round / 10 ** (counter - 1) === 1 && counter > 3) {
-                    roundTmp = Math.floor((n % round) / (round / 10)) * (round / 10);
-                    if (round + roundTmp < n) {
-                        round += roundTmp;
-                    }
+                    if (match) return [match];
+
+                    let round = n - (n % 10 ** (countDigits(n) - 1));
+
+                    return getName(round).concat(getName(n - round));
                 }
+            }
 
-                return getName(round).concat(getName(n - round));
-            };
-
-            return applyUnions(getName(num)).join(" ");
+            return applyUnions(_translate(num)).join(" ");
 
             function applyUnions(words) {
                 let result = [];
@@ -121,8 +89,7 @@ function nums2wordsBG(number) {
                     const rLength = result.length - 1;
                     const lastTwo = result.slice(-2);
                     const lastThree = result.slice(-3);
-                    const checkAvail = (list) =>
-                        !list.some((key) => keyWords.hasOwnProperty(key)) && !list.includes(union);
+                    const checkAvail = (list) => !list.some((key) => keyWords[key]) && !list.includes(union);
                     let tmp = [];
                     if (lastThree.length === 3) {
                         if (checkAvail(lastThree)) {
@@ -139,10 +106,7 @@ function nums2wordsBG(number) {
 
                     result = result.concat(tmp);
 
-                    if (
-                        keyWords.hasOwnProperty(result.slice(-1)[0]) &&
-                        keyWords.hasOwnProperty(result.slice(-3, -2)[0])
-                    ) {
+                    if (keyWords[result.slice(-1)[0]] && keyWords[result.slice(-3, -2)[0]]) {
                         result.splice(-2, 0, union);
                     }
                 })();
@@ -206,36 +170,15 @@ function nums2wordsBG(number) {
             900: "деветстотин",
         },
         4: {
-            1000: ["хиляда", "една хиляди"],
+            1: ["хиляда", "една хиляди"],
             "*": "хиляди",
         },
         5: {
-            "*": "хиляди",
+            1: ["един милион", "един милиона"],
+            "*": "милиона",
         },
         6: {
-            "*": "хиляди",
-        },
-        7: {
-            1000000: ["един милион", "един милиона"],
-            "*": "милиона",
-        },
-        8: {
-            "*": "милиона",
-        },
-        9: {
-            "*": "милиона",
-        },
-        10: {
-            1000000000: ["един милиард", "един милиарда"],
-            "*": "милиарда",
-        },
-        11: {
-            "*": "милиарда",
-        },
-        11: {
-            "*": "милиарда",
-        },
-        12: {
+            1: ["един милиард", "един милиарда"],
             "*": "милиарда",
         },
     };
