@@ -28,22 +28,19 @@
                 text-align: center;
             }
 
-            #label {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-
             #input,
             #output {
                 font-size: 18px;
                 padding: 10px;
                 box-sizing: border-box;
                 margin-bottom: 20px;
+                text-align: center;
             }
 
             #output {
                 font-size: 24px;
                 text-align: center;
+                width: 70%;
             }
 
             input[type="number"]::-webkit-outer-spin-button,
@@ -63,8 +60,7 @@
     </head>
     <body>
         <div id="container">
-            <label for="input" id="label">Въведете число:</label>
-            <input type="number" id="input" onkeyup="outputNumber()" />
+            <input type="number" placeholder="Въведете число" id="input" onkeyup="outputNumber()" />
         </div>
         <p id="output" class="transition"></p>
         <script>
