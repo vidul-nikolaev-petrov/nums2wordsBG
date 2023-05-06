@@ -76,7 +76,8 @@ function nums2wordsBG(number) {
 
                 let roundTmp;
                 let round = n - (n % 10 ** (getLength() - 1));
-                if (round / 10 ** (countDigits(round) - 1) === 1) {
+                let counter = countDigits(round);
+                if (round / 10 ** (counter - 1) === 1 && counter > 3) {
                     roundTmp = Math.floor((n % round) / (round / 10)) * (round / 10);
                     if (round + roundTmp < n) {
                         round += roundTmp;
@@ -241,6 +242,6 @@ function nums2wordsBG(number) {
 
 nums2wordsBG(); // init nums for later settings
 
-// // quick check:
+// quick check:
 // const log = (e) => console.log(nums2wordsBG(e));
 // [1, 8, 16, 32, 128, 256, 1024, 12021, 20048, 400960, 801920, 800008, 550660128, 901999000].forEach(log);
