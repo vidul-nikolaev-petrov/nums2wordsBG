@@ -46,10 +46,9 @@ function nums2wordsBG(number) {
 
                 function getName(n) {
                     let match = nums[countDigits(n)][n];
+                    let round = n - (n % 10 ** (countDigits(n) - 1));
 
                     if (match) return [match];
-
-                    let round = n - (n % 10 ** (countDigits(n) - 1));
 
                     return getName(round).concat(getName(n - round));
                 }
@@ -66,6 +65,8 @@ function nums2wordsBG(number) {
                     милиона: true,
                     милиард: true,
                     милиарда: true,
+                    трилион: true,
+                    трилиона: true,
                 };
 
                 for (let i = 0; i < words.length; i++) {
@@ -115,7 +116,7 @@ function nums2wordsBG(number) {
                     const replace = { две: "два", едно: "един", едно: "една" };
 
                     result.forEach((e, i) => {
-                        if (e === "милиона" || e === "милиарда") {
+                        if (e === "милиона" || e === "милиарда" || e === "трилион" || e === "трилиона") {
                             if (replace[result[i - 1]]) result[i - 1] = replace[result[i - 1]];
                         } else if (e === "хиляди" && result[i - 1] === "едно") {
                             result[i - 1] = replace[result[i - 1]];
@@ -180,6 +181,10 @@ function nums2wordsBG(number) {
         6: {
             1: ["един милиард", "един милиарда"],
             "*": "милиарда",
+        },
+        7: {
+            1: ["един трилион", "един трилиона"],
+            "*": "трилиона",
         },
     };
 
