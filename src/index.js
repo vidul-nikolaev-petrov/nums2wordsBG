@@ -138,6 +138,13 @@ function nums2wordsBG(number) {
                     }
 
                     result = result.concat(tmp);
+
+                    if (
+                        keyWords.hasOwnProperty(result.slice(-1)[0]) &&
+                        keyWords.hasOwnProperty(result.slice(-3, -2)[0])
+                    ) {
+                        result.splice(-2, 0, union);
+                    }
                 })();
 
                 (function specialCases() {
