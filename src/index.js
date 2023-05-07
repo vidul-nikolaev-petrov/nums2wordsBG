@@ -76,6 +76,8 @@ function nums2wordsBG(number) {
             return countDigits(Math.floor(number / 10), ++count);
         };
 
+        return applyUnions(_translate(string)).join(" ");
+
         function _translate(string) {
             const numbers = BigInt(string).toLocaleString("en-US").split(",");
             const getIndex = (list, i) => list.length - i + 2;
@@ -122,8 +124,6 @@ function nums2wordsBG(number) {
                 return getName(round).concat(getName(n - round));
             }
         }
-
-        return applyUnions(_translate(string)).join(" ");
 
         function applyUnions(words) {
             let result = [];
