@@ -201,7 +201,7 @@ function nums2wordsBG(number) {
                             result[i - 1] = replace[result[i - 1]];
                         }
                     }
-                    if (e === "хиляди" && replace1000[result[i - 1]]) {
+                    else if (e === "хиляди" && replace1000[result[i - 1]]) {
                         result[i - 1] = replace1000[result[i - 1]];
                     }
                 });
