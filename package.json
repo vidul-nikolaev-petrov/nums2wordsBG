@@ -1,12 +1,24 @@
 {
-  "name": "nums2wordsBG",
-  "version": "1.0.0",
-  "description": "Converts numbers to words",
-  "author": "Видул Николаев Петров",
-  "scripts": {
-    "test": "jasmine --color --fail-fast"
-  },
-  "devDependencies": {
-    "jasmine": "^4.6.0"
+    "name": "nums2words-bg",
+    "version": "1.0.2",
+    "description": "Converts numbers to words in Bulgarian",
+    "author": "Видул Николаев Петров <vidul.petrov@gmail.com>",
+    "license": "GPL v3.0",
+    "main": "src/index.js",
+    "keywords": [
+        "converter",
+        "words",
+        "numbers",
+        "numbers to words"
+    ],
+    "scripts": {
+        "test": "jasmine --color --fail-fast"
+    },
+    "devDependencies": {
+        "jasmine": "4.6.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/vidul-nikolaev-petrov/nums2wordsBG.git"
   }
 }
