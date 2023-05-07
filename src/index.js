@@ -115,7 +115,8 @@ function nums2wordsBG(number) {
                 })();
 
                 (function specialCases() {
-                    const replace = { две: "два", едно: "един", едно: "една" };
+                    const replace = { две: "два", едно: "един" };
+                    const replace1000 = { едно: "една" };
 
                     result.forEach((e, i) => {
                         if (
@@ -125,9 +126,12 @@ function nums2wordsBG(number) {
                             e === "трилиона" ||
                             e === "квадрилиона"
                         ) {
-                            if (replace[result[i - 1]]) result[i - 1] = replace[result[i - 1]];
-                        } else if (e === "хиляди" && result[i - 1] === "едно") {
-                            result[i - 1] = replace[result[i - 1]];
+                            if (replace[result[i - 1]]) {
+                                result[i - 1] = replace[result[i - 1]];
+                            }
+                        }
+                        if (e === "хиляди" && replace1000[result[i - 1]]) {
+                            result[i - 1] = replace1000[result[i - 1]];
                         }
                     });
                 })();
