@@ -62,6 +62,10 @@ const nums = {
         1: ["един квадрилион", "един квадрилиона"],
         "*": "квадрилиона",
     },
+    9: {
+        1: ["един квинтилион", "един квинтилиона"],
+        "*": "квинтилиона",
+    },
 };
 
 function nums2wordsBG(number) {
@@ -134,6 +138,7 @@ function nums2wordsBG(number) {
                 трилиона: true,
                 квадрилион: true,
                 квадрилиона: true,
+                квинтилиона: true,
             };
 
             for (let i = 0; i < words.length; i++) {
@@ -189,7 +194,8 @@ function nums2wordsBG(number) {
                         e === "милиарда" ||
                         e === "трилион" ||
                         e === "трилиона" ||
-                        e === "квадрилиона"
+                        e === "квадрилиона" || 
+                        e === "квинтилиона"
                     ) {
                         if (replace[result[i - 1]]) {
                             result[i - 1] = replace[result[i - 1]];
