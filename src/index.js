@@ -67,6 +67,8 @@ function nums2wordsBG(number) {
                     милиарда: true,
                     трилион: true,
                     трилиона: true,
+                    квадрилион: true,
+                    квадрилиона: true,
                 };
 
                 for (let i = 0; i < words.length; i++) {
@@ -116,7 +118,13 @@ function nums2wordsBG(number) {
                     const replace = { две: "два", едно: "един", едно: "една" };
 
                     result.forEach((e, i) => {
-                        if (e === "милиона" || e === "милиарда" || e === "трилион" || e === "трилиона") {
+                        if (
+                            e === "милиона" ||
+                            e === "милиарда" ||
+                            e === "трилион" ||
+                            e === "трилиона" ||
+                            e === "квадрилиона"
+                        ) {
                             if (replace[result[i - 1]]) result[i - 1] = replace[result[i - 1]];
                         } else if (e === "хиляди" && result[i - 1] === "едно") {
                             result[i - 1] = replace[result[i - 1]];
@@ -185,6 +193,10 @@ function nums2wordsBG(number) {
         7: {
             1: ["един трилион", "един трилиона"],
             "*": "трилиона",
+        },
+        8: {
+            1: ["един квадрилион", "един квадрилиона"],
+            "*": "квадрилиона",
         },
     };
 
