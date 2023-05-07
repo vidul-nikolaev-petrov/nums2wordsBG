@@ -1,14 +1,14 @@
 function nums2wordsBG(number) {
     const nums = {
-        translate: function (num) {
+        translate: function (string) {
             const union = "и";
             const countDigits = (number, count = 0) => {
                 if (!number) return count;
                 return countDigits(Math.floor(number / 10), ++count);
             };
 
-            function _translate(number) {
-                const numbers = Number(number).toLocaleString("en-US").split(",");
+            function _translate(string) {
+                const numbers = BigInt(string).toLocaleString("en-US").split(",");
                 const getIndex = (list, i) => list.length - i + 2;
 
                 let result = [],
@@ -54,7 +54,7 @@ function nums2wordsBG(number) {
                 }
             }
 
-            return applyUnions(_translate(num)).join(" ");
+            return applyUnions(_translate(string)).join(" ");
 
             function applyUnions(words) {
                 let result = [];
@@ -211,4 +211,21 @@ nums2wordsBG(); // init nums for later settings
 
 // quick check:
 // const log = (e) => console.log(nums2wordsBG(e));
-// [1, 8, 16, 32, 128, 256, 1024, 12021, 20048, 400960, 801920, 800008, 550660128, 901999000].forEach(log);
+// [
+//     1,
+//     8,
+//     16,
+//     32,
+//     128,
+//     256,
+//     1024,
+//     12021,
+//     20048,
+//     400960,
+//     801920,
+//     800008,
+//     550660128,
+//     901999000,
+//     "809099882884455",
+//     "453092982340982532",
+// ].forEach(log);
