@@ -209,6 +209,10 @@ function nums2wordsBG(number) {
 
 nums2wordsBG(); // init nums for later settings
 
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = nums2wordsBG;
+}
+
 // quick check:
 // const log = (e) => console.log(nums2wordsBG(e));
 // [

@@ -1,0 +1,12 @@
+{
+  "name": "nums2wordsBG",
+  "version": "1.0.0",
+  "description": "Converts numbers to words",
+  "author": "Видул Николаев Петров",
+  "scripts": {
+    "test": "jasmine --color --fail-fast"
+  },
+  "devDependencies": {
+    "jasmine": "^4.6.0"
+  }
+}
