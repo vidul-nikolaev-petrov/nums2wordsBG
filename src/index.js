@@ -70,17 +70,16 @@ const nums = {
 
 function nums2wordsBG(number) {
     function translate(string) {
-        const union = "и";
-        const countDigits = (number, count = 0) => {
-            if (!number) return count;
-            return countDigits(Math.floor(number / 10), ++count);
-        };
 
         return applyUnions(_translate(string)).join(" ");
 
         function _translate(string) {
             const numbers = BigInt(string).toLocaleString("en-US").split(",");
             const getIndex = (list, i) => list.length - i + 2;
+            const countDigits = (number, count = 0) => {
+                if (!number) return count;
+                return countDigits(Math.floor(number / 10), ++count);
+            };
 
             let result = [],
                 match,
@@ -127,6 +126,7 @@ function nums2wordsBG(number) {
 
         function applyUnions(words) {
             let result = [];
+            const union = "и";
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
@@ -164,6 +164,7 @@ function nums2wordsBG(number) {
                 const lastThree = result.slice(-3);
                 const checkAvail = (list) => !list.some((key) => keyWords[key]) && !list.includes(union);
                 let tmp = [];
+
                 if (lastThree.length === 3) {
                     if (checkAvail(lastThree)) {
                         tmp = result.splice(-3);
