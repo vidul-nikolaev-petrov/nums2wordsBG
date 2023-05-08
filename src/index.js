@@ -79,7 +79,7 @@ function nums2wordsBG(string) {
             const getIndex = (list, i) => list.length - i + 2;
             const countDigits = (number) => String(number).length;
 
-            if (numbers.length === 1 && !Number(numbers[0])) {
+            if (numbers.length === 1 && numbers[0] === "0") {
                 return [nums[1][0]];
             }
 
