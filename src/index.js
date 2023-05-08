@@ -212,19 +212,19 @@ function nums2wordsBG(string) {
     }
 
     function currency(string, format={}) {
-        const { labelLv = "лева", labelSt = "стотинки", separator = " и " } = format;
+        let { labelLv = "лева", labelSt = "стотинки", separator = " и " } = format;
         let [lv, st] = String(string).split(".").map(nums2wordsBG);
-        lv = lv.replace("едно", nums[1].gender[1].m);
-        st = st.replace("едно", nums[1].gender[1].f);
+        lv = lv.replace(nums[1][1], nums[1].gender[1].m);
+        st = st.replace(nums[1][1], nums[1].gender[1].f);
 
         if (lv === nums[1].gender[1].m) {
-            format.lv = "лев";
+            labelLv = "лев";
         } else if (!lv) {
             lv = nums[1][0];
         }
         
         if (st === nums[1].gender[1].f) {
-            format.st = "стотинка";
+            labelSt = "стотинка";
         } else if (!st) {
             st = nums[1][0];
         }
