@@ -50,6 +50,7 @@ const nums = {
     5: {
         1: ["един милион", "един милиона"],
         "*": "милиона",
+        gender: { 2: "два" },
     },
     6: {
         1: ["един милиард", "един милиарда"],
@@ -186,8 +187,8 @@ function nums2wordsBG(string) {
             })();
 
             (function specialCases() {
-                const replace = { две: "два", едно: "един" };
-                const replace1000 = { едно: "една" };
+                const replace = { две: nums[5].gender[2], едно: nums[1].gender[1].m };
+                const replace1000 = { едно: nums[1].gender[1].f };
 
                 result.forEach((e, i) => {
                     if (
@@ -211,7 +212,7 @@ function nums2wordsBG(string) {
         }
     }
 
-    function currency(string, format={}) {
+    function currency(string, format = {}) {
         let { labelLv = "лева", labelSt = "стотинки", separator = " и " } = format;
         let [lv, st] = String(string).split(".").map(nums2wordsBG);
         lv = lv.replace(nums[1][1], nums[1].gender[1].m);
@@ -222,13 +223,12 @@ function nums2wordsBG(string) {
         } else if (!lv) {
             lv = nums[1][0];
         }
-        
+
         if (st === nums[1].gender[1].f) {
             labelSt = "стотинка";
         } else if (!st) {
             st = nums[1][0];
         }
-
 
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
     }
