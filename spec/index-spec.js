@@ -1,6 +1,10 @@
 const translate = require("../src/index");
 
 describe("main tests", () => {
+    it("следва да върне 'нула'", () => {
+        expect(translate("0")).toBe("нула");
+    });
+
     it("следва да върне 'едно'", () => {
         expect(translate("1")).toBe("едно");
     });

@@ -77,10 +77,11 @@ function nums2wordsBG(string) {
         function _translate(string) {
             const numbers = BigInt(string).toLocaleString("en-US").split(",");
             const getIndex = (list, i) => list.length - i + 2;
-            const countDigits = (number, count = 0) => {
-                if (!number) return count;
-                return countDigits(Math.floor(number / 10), ++count);
-            };
+            const countDigits = (number) => String(number).length;
+
+            if (numbers.length === 1 && !Number(numbers[0])) {
+                return [nums[1][0]];
+            }
 
             let result = [],
                 match,
