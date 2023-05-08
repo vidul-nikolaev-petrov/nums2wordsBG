@@ -117,8 +117,8 @@ function nums2wordsBG(string) {
             return result;
 
             function getName(n) {
-                let match = nums[countDigits(n)][n];
-                let round = n - (n % 10 ** (countDigits(n) - 1));
+                const match = nums[countDigits(n)][n];
+                const round = n - (n % 10 ** (countDigits(n) - 1));
 
                 if (match) return [match];
 
