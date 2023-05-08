@@ -10,6 +10,7 @@ const nums = {
         7: "седем",
         8: "осем",
         9: "девет",
+        gender: { 1: { m: "един", f: "една" } },
     },
     2: {
         10: "десет",
@@ -68,9 +69,8 @@ const nums = {
     },
 };
 
-function nums2wordsBG(number) {
+function nums2wordsBG(string) {
     function translate(string) {
-
         return applyUnions(_translate(string)).join(" ");
 
         function _translate(string) {
@@ -195,14 +195,13 @@ function nums2wordsBG(number) {
                         e === "милиарда" ||
                         e === "трилион" ||
                         e === "трилиона" ||
-                        e === "квадрилиона" || 
+                        e === "квадрилиона" ||
                         e === "квинтилиона"
                     ) {
                         if (replace[result[i - 1]]) {
                             result[i - 1] = replace[result[i - 1]];
                         }
-                    }
-                    else if (e === "хиляди" && replace1000[result[i - 1]]) {
+                    } else if (e === "хиляди" && replace1000[result[i - 1]]) {
                         result[i - 1] = replace1000[result[i - 1]];
                     }
                 });
@@ -212,10 +211,33 @@ function nums2wordsBG(number) {
         }
     }
 
-    if (!number) {
+    function currency(string, format={lv: "лева", st: "стотинки", separator:"и"}) {
+        // expects the dot format: 15.88
+        let [lv, st] = String(string).split(".").map(nums2wordsBG);
+        lv = lv.replace("едно", nums[1].gender[1].m);
+        st = st.replace("едно", nums[1].gender[1].f);
+
+        if (lv === nums[1].gender[1].m) {
+            format.lv = "лев";
+        } else if (!lv) {
+            lv = nums[1][0];
+        }
+        
+        if (st === nums[1].gender[1].f) {
+            format.st = "стотинка";
+        } else if (!st) {
+            st = nums[1][0];
+        }
+
+
+        return `${lv} ${format.lv} ${format.separator} ${st} ${format.st}`;
+    }
+
+    if (!string) {
         nums2wordsBG.numbers = nums;
+        nums2wordsBG.currency = currency;
     } else {
-        return translate(number);
+        return translate(string);
     }
 }
 
