@@ -211,8 +211,8 @@ function nums2wordsBG(string) {
         }
     }
 
-    function currency(string, format={lv: "лева", st: "стотинки", separator:"и"}) {
-        // expects the dot format: 15.88
+    function currency(string, format={}) {
+        const { labelLv = "лева", labelSt = "стотинки", separator = " и " } = format;
         let [lv, st] = String(string).split(".").map(nums2wordsBG);
         lv = lv.replace("едно", nums[1].gender[1].m);
         st = st.replace("едно", nums[1].gender[1].f);
@@ -230,7 +230,7 @@ function nums2wordsBG(string) {
         }
 
 
-        return `${lv} ${format.lv} ${format.separator} ${st} ${format.st}`;
+        return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
     }
 
     if (!string) {
