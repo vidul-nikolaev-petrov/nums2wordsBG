@@ -241,6 +241,12 @@ function nums2wordsBG(string) {
             st = nums[1][0];
         }
 
+        lv = lv.replace(nums[1].gender[1].f, nums[1].gender[1].m);
+
+        // if (separator === " и " && st.match(separator)) {
+        //     st = st.replace(separator, ", и ");
+        // }
+
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
     }
 
