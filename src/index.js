@@ -263,10 +263,19 @@ function nums2wordsBG(string) {
             st = nums[1][0];
         }
 
-        lv = lv.replace(new RegExp(`${nums[1][1]}$`), cs[currency].gender[1][defLv]);
-        lv = lv.replace(new RegExp(`${nums[1][2]}$`), cs[currency].gender[2][defLv]);
-        st = st.replace(new RegExp(`${nums[1][1]}$`), cs[currency].gender[1][defSt]);
-        st = st.replace(new RegExp(`${nums[1][2]}$`), cs[currency].gender[2][defSt]);
+        const regOne = new RegExp(`${nums[1][1]}$`);
+        const regTwo = new RegExp(`${nums[1][2]}$`);
+
+        if (lv.match(regOne)) {
+            lv = lv.replace(regOne, cs[currency].gender[1][defLv]);
+        } else if (lv.match(regTwo)) {
+            lv = lv.replace(regTwo, cs[currency].gender[2][defLv]);
+        }
+        if (st.match(regOne)) {
+            st = st.replace(regOne, cs[currency].gender[1][defSt]);
+        } else if (st.match(regTwo)) {
+            st = st.replace(regTwo, cs[currency].gender[2][defSt]);
+        }
 
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
 
