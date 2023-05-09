@@ -12,10 +12,12 @@ nums2wordsBG.currency("101.01", {separator: ", "}); // сто и един лев
 nums2wordsBG.currency(21001.01, { labelLv: "лв.", labelSt: "ст." }); // двадесет и една хиляди и един лв. и една ст.
 
 
+nums2wordsBG.currency("01.01", {currency: "rub"}); // една рубла и една копейка
 nums2wordsBG.currency("21015.01", {currency: "rub"}); // двадесет и една хиляди и петнадесет рубли и една копейка
 nums2wordsBG.currency("401339.02", {currency: "rub"}); // четиристотин и една хиляди, триста тридесет и девет рубли и две копейки
 
 nums2wordsBG.currency("00.00", { currency: "usd" }); // нула долара и нула цента
+nums2wordsBG.currency("1.99", { currency: "usd" }); // един долар и деветдесет и девет цента
 nums2wordsBG.currency("911.01", { currency: "usd" }); // деветстотин и единадесет долара и един цент
 ```
 

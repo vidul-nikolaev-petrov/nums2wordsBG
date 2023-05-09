@@ -304,4 +304,3 @@ nums2wordsBG();
 if (typeof module !== "undefined" && module.exports) {
     module.exports = nums2wordsBG;
 }
-
