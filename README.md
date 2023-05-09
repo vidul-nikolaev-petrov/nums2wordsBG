@@ -7,9 +7,9 @@ nums2wordsBG(201401); // двеста и една хиляди, четирист
 
 
 // the 2nd (optional) parameter: {currency: "bgn", labelLv: "лв.", labelSt: "ст.", separator:" и "}
-nums2wordsBG.currency(1024.81); // хиляда двадесет и четири лева и осемдесет и една стотинки
+nums2wordsBG.currency("1024.81"); // хиляда двадесет и четири лева и осемдесет и една стотинки
 nums2wordsBG.currency("101.01", {separator: ", "}); // сто и един лева, една стотинка
-nums2wordsBG.currency(21001.01, { labelLv: "лв.", labelSt: "ст." }); // двадесет и една хиляди и един лв. и една ст.
+nums2wordsBG.currency("21001.01", { labelLv: "лв.", labelSt: "ст." }); // двадесет и една хиляди и един лв. и една ст.
 
 
 nums2wordsBG.currency("01.01", {currency: "rub"}); // една рубла и една копейка
