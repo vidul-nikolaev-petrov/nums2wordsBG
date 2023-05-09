@@ -10,7 +10,7 @@ const nums = {
         7: "седем",
         8: "осем",
         9: "девет",
-        gender: { 1: { m: "един", f: "една" } },
+        gender: { 1: { m: "един", f: "една" }, 2:  { m: "два", f: "две" }},
     },
     2: {
         10: "десет",
@@ -224,28 +224,26 @@ function nums2wordsBG(string) {
     }
 
     function currency(string, format = {}) {
-        let { labelLv = "лева", labelSt = "стотинки", separator = " и " } = format;
+        const defs = { labelLv: "лева", labelSt: "стотинки", singular: { lv: "лев", st: "стотинка" } };
+        let { labelLv = defs.labelLv, labelSt = defs.labelSt, separator = " и " } = format;
         let [lv, st] = String(string).split(".").map(nums2wordsBG);
         lv = lv.replace(nums[1][1], nums[1].gender[1].m);
         st = st.replace(nums[1][1], nums[1].gender[1].f);
 
         if (lv === nums[1].gender[1].m) {
-            labelLv = "лев";
+            labelLv = defs.singular.lv;
         } else if (!lv) {
             lv = nums[1][0];
         }
 
         if (st === nums[1].gender[1].f) {
-            labelSt = "стотинка";
+            labelSt = defs.singular.st;
         } else if (!st) {
             st = nums[1][0];
         }
 
-        lv = lv.replace(nums[1].gender[1].f, nums[1].gender[1].m);
-
-        // if (separator === " и " && st.match(separator)) {
-        //     st = st.replace(separator, ", и ");
-        // }
+        lv = lv.replace(new RegExp(`${nums[1].gender[1].f}$`), nums[1].gender[1].m);
+        lv = lv.replace(new RegExp(`${nums[1].gender[2].f}$`), nums[1].gender[2].m);
 
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
     }
@@ -264,6 +262,3 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = nums2wordsBG;
 }
 
-// quick check:
-// const log = (e) => console.log(nums2wordsBG(String(e)));
-// [1, 8, 16, 32, 128, 256, 1024, 12021, 20048, 400960, 801920, 800008].forEach(log);
