@@ -3,7 +3,7 @@
 ##### The library is written in vanilla JS.
 
 ```javascript
-nums2wordsBG(201401); // двеста и една хиляди четиристотин и едно
+nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
 
 
 // the 2nd (optional) parameter: format={labelLv: "лева", labelSt: "стотинки", separator:" и "}
