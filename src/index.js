@@ -129,6 +129,7 @@ function nums2wordsBG(string) {
         function applyUnions(words) {
             let result = [];
             const union = "и";
+            const comma = ",";
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
@@ -203,8 +204,16 @@ function nums2wordsBG(string) {
                         if (replace[result[i - 1]]) {
                             result[i - 1] = replace[result[i - 1]];
                         }
-                    } else if (e === "хиляди" && replace1000[result[i - 1]]) {
+                    } else if (e === nums[4]["*"] && replace1000[result[i - 1]]) {
                         result[i - 1] = replace1000[result[i - 1]];
+                    }
+                });
+            })();
+
+            (function addComma() {
+                result.forEach((e, i) => {
+                    if (keyWords[e] && result[i + 1] && result[i + 1] !== union && e !== nums[4][1][0]) {
+                        result[i] = result[i] + ",";
                     }
                 });
             })();
