@@ -237,9 +237,15 @@ function nums2wordsBG(string) {
             labelSt = cs[currency].labelSt,
             separator = " и ",
         } = options;
-        let [lv, st] = String(string).split(/\D+/).map(nums2wordsBG);
+        let [lv, st] = String(string).split(/\D+/);
         const defLv = cs[currency].def.lv;
         const defSt = cs[currency].def.st;
+
+        if (st.length === 1) {
+            st += "0";
+        }
+
+        [lv, st] = [lv, st].map(nums2wordsBG);
 
         if (lv === nums[1][1]) {
             if (labelLv === cs[currency].labelLv) {
@@ -304,4 +310,3 @@ nums2wordsBG();
 if (typeof module !== "undefined" && module.exports) {
     module.exports = nums2wordsBG;
 }
-
