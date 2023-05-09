@@ -4,7 +4,10 @@
         <title>Number to Words Example</title>
         <meta charset="UTF-8" />
         <script src="src/index.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Didact Gothic" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Didact Gothic"
+            rel="stylesheet"
+        />
         <link rel="apple-touch-icon" sizes="180x180" href="fav/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png" />
@@ -28,7 +31,7 @@
                 text-align: center;
             }
 
-            #input,
+            .input,
             #output {
                 font-size: 18px;
                 padding: 10px;
@@ -37,7 +40,7 @@
                 text-align: center;
             }
 
-            #input {
+            .input {
                 width: 300px;
             }
 
@@ -64,14 +67,41 @@
     </head>
     <body>
         <div id="container">
-            <input type="number" placeholder="Въведете число цифром" id="input" onkeyup="outputNumber()" />
+            <input
+                type="number"
+                placeholder="Въведете число цифром"
+                id="input"
+                class="input"
+                onkeyup="outputNumber('input', nums2wordsBG)"
+            /><br>
+            <input
+                type="number"
+                placeholder="Въведете число (BGN)"
+                id="input-c1"
+                class="input"
+                onkeyup="outputNumber('input-c1', nums2wordsBG.currency)"
+            /><br>
+            <input
+                type="number"
+                placeholder="Въведете число (RUB)"
+                id="input-c2"
+                class="input"
+                onkeyup="outputNumber('input-c2', nums2wordsBG.currency, {currency: 'rub'})"
+            /><br>
+            <input
+                type="number"
+                placeholder="Въведете число (USD)"
+                id="input-c3"
+                class="input"
+                onkeyup="outputNumber('input-c3', nums2wordsBG.currency, {currency: 'usd'})"
+            />
         </div>
         <p id="output" class="transition"></p>
         <script>
             let timer;
             let previousNumber;
-            function outputNumber() {
-                const inputElement = document.getElementById("input");
+            function outputNumber(input, f, options = {currency: "bgn"} ) {
+                const inputElement = document.getElementById(input);
                 const outputElement = document.getElementById("output");
                 const number = inputElement.value;
                 if (number === previousNumber) return;
@@ -82,7 +112,7 @@
                     }
                     outputElement.classList.remove("show");
                     timer = setTimeout(() => {
-                        outputElement.innerHTML = nums2wordsBG(number);
+                        outputElement.innerHTML = f(number, options);
                         outputElement.classList.add("show");
                     }, 256);
                 } else {

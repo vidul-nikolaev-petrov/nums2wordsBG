@@ -231,13 +231,13 @@ function nums2wordsBG(string) {
 
     function currency(string, options = {}) {
         const cs = getCurrencies();
-        let { currency = "bgn" } = options;
+        const { currency = "bgn" } = options;
         let {
             labelLv = cs[currency].labelLv,
             labelSt = cs[currency].labelSt,
             separator = " и ",
         } = options;
-        let [lv, st] = String(string).split(".").map(nums2wordsBG);
+        let [lv, st] = String(string).split(/\D+/).map(nums2wordsBG);
         const defLv = cs[currency].def.lv;
         const defSt = cs[currency].def.st;
 
