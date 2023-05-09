@@ -141,6 +141,7 @@ function nums2wordsBG(string) {
                 трилиона: true,
                 квадрилион: true,
                 квадрилиона: true,
+                квинтилион: true,
                 квинтилиона: true,
             };
 
