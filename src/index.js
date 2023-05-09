@@ -10,7 +10,7 @@ const nums = {
         7: "седем",
         8: "осем",
         9: "девет",
-        gender: { 1: { m: "един", f: "една" }, 2:  { m: "два", f: "две" }},
+        gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
     },
     2: {
         10: "десет",
@@ -231,13 +231,17 @@ function nums2wordsBG(string) {
         st = st.replace(nums[1][1], nums[1].gender[1].f);
 
         if (lv === nums[1].gender[1].m) {
-            labelLv = defs.singular.lv;
+            if (labelLv === defs.labelLv) {
+                labelLv = defs.singular.lv;
+            }
         } else if (!lv) {
             lv = nums[1][0];
         }
 
         if (st === nums[1].gender[1].f) {
-            labelSt = defs.singular.st;
+            if (labelSt === defs.labelSt) {
+                labelSt = defs.singular.st;
+            }
         } else if (!st) {
             st = nums[1][0];
         }
@@ -261,4 +265,3 @@ nums2wordsBG();
 if (typeof module !== "undefined" && module.exports) {
     module.exports = nums2wordsBG;
 }
-
