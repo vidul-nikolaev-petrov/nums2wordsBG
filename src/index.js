@@ -241,7 +241,7 @@ function nums2wordsBG(string) {
         const defLv = cs[currency].def.lv;
         const defSt = cs[currency].def.st;
 
-        if (st.length === 1) {
+        if (st && st.length === 1) {
             st += "0";
         }
 
