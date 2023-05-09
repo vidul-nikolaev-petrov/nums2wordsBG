@@ -166,7 +166,8 @@ function nums2wordsBG(string) {
                 const rLength = result.length - 1;
                 const lastTwo = result.slice(-2);
                 const lastThree = result.slice(-3);
-                const checkAvail = (list) => !list.some((key) => keyWords[key]) && !list.includes(union);
+                const checkAvail = (list) =>
+                    !list.some((key) => keyWords[key]) && !list.includes(union);
                 let tmp = [];
 
                 if (lastThree.length === 3) {
@@ -213,7 +214,12 @@ function nums2wordsBG(string) {
 
             (function addComma() {
                 result.forEach((e, i) => {
-                    if (keyWords[e] && result[i + 1] && result[i + 1] !== union && e !== nums[4][1][0]) {
+                    if (
+                        keyWords[e] &&
+                        result[i + 1] &&
+                        result[i + 1] !== union &&
+                        e !== nums[4][1][0]
+                    ) {
                         result[i] = result[i] + ",";
                     }
                 });
@@ -223,33 +229,66 @@ function nums2wordsBG(string) {
         }
     }
 
-    function currency(string, format = {}) {
-        const defs = { labelLv: "лева", labelSt: "стотинки", singular: { lv: "лев", st: "стотинка" } };
-        let { labelLv = defs.labelLv, labelSt = defs.labelSt, separator = " и " } = format;
+    function currency(string, options = {}) {
+        const cs = getCurrencies();
+        let { currency = "bgn" } = options;
+        let {
+            labelLv = cs[currency].labelLv,
+            labelSt = cs[currency].labelSt,
+            separator = " и ",
+        } = options;
         let [lv, st] = String(string).split(".").map(nums2wordsBG);
-        lv = lv.replace(nums[1][1], nums[1].gender[1].m);
-        st = st.replace(nums[1][1], nums[1].gender[1].f);
+        const defLv = cs[currency].def.lv;
+        const defSt = cs[currency].def.st;
 
-        if (lv === nums[1].gender[1].m) {
-            if (labelLv === defs.labelLv) {
-                labelLv = defs.singular.lv;
+        if (lv === nums[1][1]) {
+            if (labelLv === cs[currency].labelLv) {
+                labelLv = cs[currency].singular.lv;
             }
         } else if (!lv) {
             lv = nums[1][0];
         }
 
-        if (st === nums[1].gender[1].f) {
-            if (labelSt === defs.labelSt) {
-                labelSt = defs.singular.st;
+        if (st === nums[1][1]) {
+            if (labelSt === cs[currency].labelSt) {
+                labelSt = cs[currency].singular.st;
             }
         } else if (!st) {
             st = nums[1][0];
         }
 
-        lv = lv.replace(new RegExp(`${nums[1].gender[1].f}$`), nums[1].gender[1].m);
-        lv = lv.replace(new RegExp(`${nums[1].gender[2].f}$`), nums[1].gender[2].m);
+        lv = lv.replace(new RegExp(`${nums[1][1]}$`), cs[currency].gender[1][defLv]);
+        lv = lv.replace(new RegExp(`${nums[1][2]}$`), cs[currency].gender[2][defLv]);
+        st = st.replace(new RegExp(`${nums[1][1]}$`), cs[currency].gender[1][defSt]);
+        st = st.replace(new RegExp(`${nums[1][2]}$`), cs[currency].gender[2][defSt]);
 
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
+
+        function getCurrencies() {
+            return {
+                bgn: {
+                    labelLv: "лева",
+                    labelSt: "стотинки",
+                    singular: { lv: "лев", st: "стотинка" },
+                    def: { lv: "m", st: "f" },
+                    gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
+                },
+                rub: {
+                    labelLv: "рубли",
+                    labelSt: "копейки",
+                    singular: { lv: "рубла", st: "копейка" },
+                    def: { lv: "f", st: "f" },
+                    gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
+                },
+                usd: {
+                    labelLv: "долара",
+                    labelSt: "цента",
+                    singular: { lv: "долар", st: "цент" },
+                    def: { lv: "m", st: "m" },
+                    gender: { 1: { m: "един" }, 2: { m: "два" } },
+                },
+            };
+        }
     }
 
     if (!string) {
@@ -265,3 +304,4 @@ nums2wordsBG();
 if (typeof module !== "undefined" && module.exports) {
     module.exports = nums2wordsBG;
 }
+
