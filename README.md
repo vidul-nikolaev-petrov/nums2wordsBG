@@ -3,6 +3,9 @@
 ##### The library is written in vanilla JS.
 
 ```javascript
+const nums2wordsBG = require('nums2words-bg');
+
+
 nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
 
 
