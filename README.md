@@ -1,6 +1,13 @@
 # nums2wordsBG
 ### Converts numbers from numeric to verbal in Bulgarian
-##### The library is written in vanilla JS.
+
+## Install
+
+```javascript
+npm i nums2words-bg
+```
+
+## Usage
 
 ```javascript
 const nums2wordsBG = require('nums2words-bg');
@@ -24,5 +31,5 @@ nums2wordsBG.currency("1.99", { currency: "usd" }); // един долар и д
 nums2wordsBG.currency("911.01", { currency: "usd" }); // деветстотин и единадесет долара и един цент
 ```
 
-[Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример.
+The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример.
 
