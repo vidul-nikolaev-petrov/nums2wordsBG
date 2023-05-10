@@ -79,7 +79,14 @@
                 placeholder="Въведете число (BGN)"
                 id="input-c1"
                 class="input"
-                onkeyup="outputNumber('input-c1', nums2wordsBG.currency)"
+                onkeyup="outputNumber('input-c1', nums2wordsBG.currency())"
+            /><br>
+            <input
+                type="number"
+                placeholder="Въведете число (BTC)"
+                id="input-8"
+                class="input"
+                onkeyup="outputNumber('input-8', nums2wordsBG.currency, {currency: 'btc'})"
             /><br>
             <input
                 type="number"

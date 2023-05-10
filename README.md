@@ -21,6 +21,9 @@ nums2wordsBG.currency("1024.81"); // хиляда двадесет и четир
 nums2wordsBG.currency("101.01", {separator: ", "}); // сто и един лева, една стотинка
 nums2wordsBG.currency("21001.01", { labelLv: "лв.", labelSt: "ст." }); // двадесет и една хиляди и един лв. и една ст.
 
+nums2wordsBG.currency("1.01", {currency: "btc"}); // един биткойн и едно сатоши
+nums2wordsBG.currency("2.1", {currency: "btc"}); // два биткойна и десет сатоши
+nums2wordsBG.currency(".208000", {currency: "btc"}); // нула биткойна и двеста и осем хиляди сатоши
 
 nums2wordsBG.currency("01.01", {currency: "rub"}); // една рубла и една копейка
 nums2wordsBG.currency("21015.01", {currency: "rub"}); // двадесет и една хиляди и петнадесет рубли и една копейка

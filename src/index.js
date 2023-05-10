@@ -288,6 +288,13 @@ function nums2wordsBG(string) {
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
                 },
+                btc: {
+                    labelLv: "биткойна",
+                    labelSt: "сатоши",
+                    singular: { lv: "биткойн", st: "сатоши" },
+                    def: { lv: "m", st: "f" },
+                    gender: { 1: { m: "един", f: "едно" }, 2: { m: "два", f: "две" } },
+                },
                 rub: {
                     labelLv: "рубли",
                     labelSt: "копейки",
