@@ -242,7 +242,8 @@ function nums2wordsBG(string) {
         const defSt = cs[currency].def.st;
 
         if (cs[currency].decimals) {
-            st *= cs[currency].decimals;
+            st = Number("." + st);
+            st = Math.floor(st * cs[currency].decimals);
         } else if (st && st.length === 1) {
             st += "0";
         }
@@ -294,7 +295,7 @@ function nums2wordsBG(string) {
                     labelLv: "биткойна",
                     labelSt: "сатоши",
                     singular: { lv: "биткойн", st: "сатоши" },
-                    decimals: 10000000,
+                    decimals: 100000000,
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "едно" }, 2: { m: "два", f: "две" } },
                 },
