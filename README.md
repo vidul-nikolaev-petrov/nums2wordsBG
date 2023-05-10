@@ -1,5 +1,5 @@
 # nums2wordsBG 🇧🇬
-Converts numbers from numeric to verbal in Bulgarian.
+Преобразува числата в думи (converts numbers to words in Bulgarian).
 
 ## Install
 
