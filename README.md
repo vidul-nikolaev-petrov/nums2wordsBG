@@ -34,5 +34,5 @@ nums2wordsBG.currency("1.99", { currency: "usd" }); // един долар и д
 nums2wordsBG.currency("911.01", { currency: "usd" }); // деветстотин и единадесет долара и един цент
 ```
 
-The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример.
+The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример. [Повече](https://github.com/vidul-nikolaev-petrov/nums2wordsBG/tree/main/spec) примери в тестовете.
 
