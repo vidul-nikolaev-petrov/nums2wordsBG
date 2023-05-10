@@ -232,35 +232,31 @@ function nums2wordsBG(string) {
     function currency(string, options = {}) {
         const cs = getCurrencies();
         const { currency = "bgn" } = options;
-        let {
-            labelLv = cs[currency].labelLv,
-            labelSt = cs[currency].labelSt,
-            separator = " и ",
-        } = options;
+        const c = cs[currency];
+        let { labelLv = c.labelLv, labelSt = c.labelSt, separator = " и " } = options;
         let [lv, st] = String(string).split(/\D+/);
-        const defLv = cs[currency].def.lv;
-        const defSt = cs[currency].def.st;
+        const defLv = c.def.lv;
+        const defSt = c.def.st;
 
-        if (cs[currency].decimals && st) {
-            st = ("." + st) * cs[currency].decimals;
+        if (st) {
+            st = Number("." + st);
+            st = st * c.decimals;
             st = st.toFixed(0);
-        } else if (st && st.length === 1) {
-            st += "0";
         }
 
         [lv, st] = [lv, st].map(nums2wordsBG);
 
         if (lv === nums[1][1]) {
-            if (labelLv === cs[currency].labelLv) {
-                labelLv = cs[currency].singular.lv;
+            if (labelLv === c.labelLv) {
+                labelLv = c.singular.lv;
             }
         } else if (!lv) {
             lv = nums[1][0];
         }
 
         if (st === nums[1][1]) {
-            if (labelSt === cs[currency].labelSt) {
-                labelSt = cs[currency].singular.st;
+            if (labelSt === c.labelSt) {
+                labelSt = c.singular.st;
             }
         } else if (!st) {
             st = nums[1][0];
@@ -270,14 +266,14 @@ function nums2wordsBG(string) {
         const regTwo = new RegExp(`${nums[1][2]}$`);
 
         if (lv.match(regOne)) {
-            lv = lv.replace(regOne, cs[currency].gender[1][defLv]);
+            lv = lv.replace(regOne, c.gender[1][defLv]);
         } else if (lv.match(regTwo)) {
-            lv = lv.replace(regTwo, cs[currency].gender[2][defLv]);
+            lv = lv.replace(regTwo, c.gender[2][defLv]);
         }
         if (st.match(regOne)) {
-            st = st.replace(regOne, cs[currency].gender[1][defSt]);
+            st = st.replace(regOne, c.gender[1][defSt]);
         } else if (st.match(regTwo)) {
-            st = st.replace(regTwo, cs[currency].gender[2][defSt]);
+            st = st.replace(regTwo, c.gender[2][defSt]);
         }
 
         return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
@@ -288,6 +284,7 @@ function nums2wordsBG(string) {
                     labelLv: "лева",
                     labelSt: "стотинки",
                     singular: { lv: "лев", st: "стотинка" },
+                    decimals: 100,
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
                 },
@@ -303,6 +300,7 @@ function nums2wordsBG(string) {
                     labelLv: "рубли",
                     labelSt: "копейки",
                     singular: { lv: "рубла", st: "копейка" },
+                    decimals: 100,
                     def: { lv: "f", st: "f" },
                     gender: { 1: { f: "една" }, 2: { f: "две" } },
                 },
@@ -310,6 +308,7 @@ function nums2wordsBG(string) {
                     labelLv: "долара",
                     labelSt: "цента",
                     singular: { lv: "долар", st: "цент" },
+                    decimals: 100,
                     def: { lv: "m", st: "m" },
                     gender: { 1: { m: "един" }, 2: { m: "два" } },
                 },
