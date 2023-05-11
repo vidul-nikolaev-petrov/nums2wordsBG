@@ -233,10 +233,17 @@ function nums2wordsBG(string) {
         const cs = getCurrencies();
         const { currency = "bgn" } = options;
         const c = cs[currency];
-        const defLv = c.def.lv;
-        const defSt = c.def.st;
-        let { labelLv = c.labelLv, labelSt = c.labelSt, separator = " и " } = options;
+        const defBig = c.def.lv;
+        const defSmall = c.def.st;
+        let {
+            labelBig = c.labelBig,
+            labelSmall = c.labelSmall,
+            separator = " и ",
+            displayBig = true,
+            displaySmall = true,
+        } = options;
         let [lv, st] = String(string).split(/\D+/);
+        let result;
 
         if (Number(st)) {
             st = getFixedLength(st, c);
@@ -248,16 +255,16 @@ function nums2wordsBG(string) {
         [lv, st] = [lv, st].map(nums2wordsBG);
 
         if (lv === nums[1][1]) {
-            if (labelLv === c.labelLv) {
-                labelLv = c.singular.lv;
+            if (labelBig === c.labelBig) {
+                labelBig = c.singular.lv;
             }
         } else if (!lv) {
             lv = nums[1][0];
         }
 
         if (st === nums[1][1]) {
-            if (labelSt === c.labelSt) {
-                labelSt = c.singular.st;
+            if (labelSmall === c.labelSmall) {
+                labelSmall = c.singular.st;
             }
         } else if (!st) {
             st = nums[1][0];
@@ -267,55 +274,58 @@ function nums2wordsBG(string) {
         const regTwo = new RegExp(`${nums[1][2]}$`);
 
         if (lv.match(regOne)) {
-            lv = lv.replace(regOne, c.gender[1][defLv]);
+            lv = lv.replace(regOne, c.gender[1][defBig]);
         } else if (lv.match(regTwo)) {
-            lv = lv.replace(regTwo, c.gender[2][defLv]);
+            lv = lv.replace(regTwo, c.gender[2][defBig]);
         }
         if (st.match(regOne)) {
-            st = st.replace(regOne, c.gender[1][defSt]);
+            st = st.replace(regOne, c.gender[1][defSmall]);
         } else if (st.match(regTwo)) {
-            st = st.replace(regTwo, c.gender[2][defSt]);
+            st = st.replace(regTwo, c.gender[2][defSmall]);
         }
 
-        return `${lv} ${labelLv}${separator}${st} ${labelSt}`;
+        result = displayBig ? lv + " " + labelBig + (displaySmall ? separator : "") : "";
+        result += displaySmall ? st + " " + labelSmall : "";
+
+        return result;
 
         function getCurrencies() {
             return {
                 bgn: {
-                    labelLv: "лева",
-                    labelSt: "стотинки",
+                    labelBig: "лева",
+                    labelSmall: "стотинки",
                     singular: { lv: "лев", st: "стотинка" },
                     decimals: 100,
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
                 },
                 btc: {
-                    labelLv: "биткойна",
-                    labelSt: "сатоши",
+                    labelBig: "биткойна",
+                    labelSmall: "сатоши",
                     singular: { lv: "биткойн", st: "сатоши" },
                     decimals: 100000000,
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "едно" }, 2: { m: "два", f: "две" } },
                 },
                 cny: {
-                    labelLv: "юана",
-                    labelSt: "фена",
+                    labelBig: "юана",
+                    labelSmall: "фена",
                     singular: { lv: "юан", st: "фен" },
                     decimals: 100,
                     def: { lv: "m", st: "m" },
                     gender: { 1: { m: "един" }, 2: { m: "два" } },
                 },
                 rub: {
-                    labelLv: "рубли",
-                    labelSt: "копейки",
+                    labelBig: "рубли",
+                    labelSmall: "копейки",
                     singular: { lv: "рубла", st: "копейка" },
                     decimals: 100,
                     def: { lv: "f", st: "f" },
                     gender: { 1: { f: "една" }, 2: { f: "две" } },
                 },
                 usd: {
-                    labelLv: "долара",
-                    labelSt: "цента",
+                    labelBig: "долара",
+                    labelSmall: "цента",
                     singular: { lv: "долар", st: "цент" },
                     decimals: 100,
                     def: { lv: "m", st: "m" },

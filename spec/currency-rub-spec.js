@@ -29,8 +29,8 @@ describe("currency RUB tests", () => {
         expect(
             translate.currency("00.00", {
                 currency: "rub",
-                labelLv: "руб.",
-                labelSt: "коп.",
+                labelBig: "руб.",
+                labelSmall: "коп.",
                 separator: ", "
             })
         ).toBe("нула руб., нула коп.");

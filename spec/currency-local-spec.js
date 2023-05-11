@@ -9,6 +9,15 @@ describe("local currency tests", () => {
         expect(translate.currency("00.009")).toBe("нула лева и нула стотинки");
     });
 
+    it("следва да върне 'единадесет лева'", () => {
+        expect(translate.currency("11", {displaySmall: false})).toBe("единадесет лева");
+    });
+
+    it("следва да върне 'единадесет стотинки'", () => {
+        expect(translate.currency("0.11", {displayBig: false})).toBe("единадесет стотинки");
+    });
+
+
     it("следва да върне 'един лев и една стотинка'", () => {
         expect(translate.currency("1.01")).toBe("един лев и една стотинка");
     });
@@ -52,7 +61,7 @@ describe("local currency tests", () => {
     });
 
     it("следва да върне 'две хиляди и осемстотин лв. и осем ст.'", () => {
-        expect(translate.currency("2800.08", { labelLv: "лв.", labelSt: "ст." })).toBe(
+        expect(translate.currency("2800.08", { labelBig: "лв.", labelSmall: "ст." })).toBe(
             "две хиляди и осемстотин лв. и осем ст."
         );
     });
