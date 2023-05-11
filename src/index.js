@@ -297,6 +297,14 @@ function nums2wordsBG(string) {
                     def: { lv: "m", st: "f" },
                     gender: { 1: { m: "един", f: "едно" }, 2: { m: "два", f: "две" } },
                 },
+                cny: {
+                    labelLv: "юана",
+                    labelSt: "фена",
+                    singular: { lv: "юан", st: "фен" },
+                    decimals: 100,
+                    def: { lv: "m", st: "m" },
+                    gender: { 1: { m: "един" }, 2: { m: "два" } },
+                },
                 rub: {
                     labelLv: "рубли",
                     labelSt: "копейки",
