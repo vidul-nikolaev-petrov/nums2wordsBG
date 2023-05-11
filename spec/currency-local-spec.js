@@ -5,6 +5,10 @@ describe("local currency tests", () => {
         expect(translate.currency("00.00")).toBe("нула лева и нула стотинки");
     });
 
+    it("следва да върне 'нула лева и нула стотинки'", () => {
+        expect(translate.currency("00.009")).toBe("нула лева и нула стотинки");
+    });
+
     it("следва да върне 'един лев и една стотинка'", () => {
         expect(translate.currency("1.01")).toBe("един лев и една стотинка");
     });

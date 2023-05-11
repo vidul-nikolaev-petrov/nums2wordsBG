@@ -233,12 +233,13 @@ function nums2wordsBG(string) {
         const cs = getCurrencies();
         const { currency = "bgn" } = options;
         const c = cs[currency];
-        let { labelLv = c.labelLv, labelSt = c.labelSt, separator = " и " } = options;
-        let [lv, st] = String(string).split(/\D+/);
         const defLv = c.def.lv;
         const defSt = c.def.st;
+        let { labelLv = c.labelLv, labelSt = c.labelSt, separator = " и " } = options;
+        let [lv, st] = String(string).split(/\D+/);
 
-        if (st) {
+        if (Number(st)) {
+            st = getFixedLength(st, c);
             st = Number("." + st);
             st = st * c.decimals;
             st = st.toFixed(0);
@@ -313,6 +314,10 @@ function nums2wordsBG(string) {
                     gender: { 1: { m: "един" }, 2: { m: "два" } },
                 },
             };
+        }
+
+        function getFixedLength(string, c) {
+            return string.substring(0, String(c.decimals).length - 1);
         }
     }
 
