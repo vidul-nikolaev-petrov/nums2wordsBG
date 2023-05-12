@@ -16,10 +16,11 @@ const nums2wordsBG = require('nums2words-bg');
 nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
 
 
-// the 2nd (optional) parameter: {currency: "bgn", labelBig: "лв.", labelSmall: "ст.", separator:" и "}
 nums2wordsBG.currency("1024.81"); // хиляда двадесет и четири лева и осемдесет и една стотинки
 nums2wordsBG.currency("101.1", {separator: ", "}); // сто и един лева и десет стотинки
 nums2wordsBG.currency("21001.01", { labelBig: "лв.", labelSmall: "ст." }); // двадесет и една хиляди и един лв. и една ст.
+nums2wordsBG.currency("11", {displaySmall: false}); // единадесет лева
+nums2wordsBG.currency("0.11", {displayBig: false}); // единадесет стотинки
 
 nums2wordsBG.currency(".00000001", {currency: "btc"}); // нула биткойна и едно сатоши
 nums2wordsBG.currency("2.01", {currency: "btc"}); // два биткойна и един милион сатоши
