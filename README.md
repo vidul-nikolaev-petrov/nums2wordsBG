@@ -12,10 +12,9 @@ npm i nums2words-bg
 ```javascript
 const nums2wordsBG = require('nums2words-bg');
 
-
 nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
 
-
+// currencies
 nums2wordsBG.currency("1024.81"); // хиляда двадесет и четири лева и осемдесет и една стотинки
 nums2wordsBG.currency("101.1", {separator: ", "}); // сто и един лева и десет стотинки
 nums2wordsBG.currency("21001.01", { labelBig: "лв.", labelSmall: "ст." }); // двадесет и една хиляди и един лв. и една ст.
@@ -34,6 +33,11 @@ nums2wordsBG.currency("21015.01", {currency: "rub"}); // двадесет и е�
 
 nums2wordsBG.currency("00.00", { currency: "usd" }); // нула долара и нула цента
 nums2wordsBG.currency("1.99", { currency: "usd" }); // един долар и деветдесет и девет цента
+
+// time
+nums2wordsBG.time("00:01:01"); // "нула часа, една минута и една секунда"
+nums2wordsBG.time("10:59:03"); // десет часа, петдесет и девет минути и три секунди
+nums2wordsBG.time("1:30:4", { displayMinute: false, labelHour: "часа" }); // един часа и четири секунди
 ```
 
 The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример. [Повече](https://github.com/vidul-nikolaev-petrov/nums2wordsBG/tree/main/spec) примери в тестовете.

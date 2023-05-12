@@ -229,8 +229,8 @@ function nums2wordsBG(string) {
         }
     }
 
-    function currency(string, options = {}) {
-        const cs = getCurrencies();
+    function currency(string, options = {}, f) {
+        const cs = f ? f() : getCurrencies();
         const { currency = "bgn" } = options;
         const c = cs[currency];
         const defBig = c.def.lv;
@@ -339,9 +339,98 @@ function nums2wordsBG(string) {
         }
     }
 
+    function time(string, options = {}, f) {
+        const u = f ? f() : getTime();
+        const { hour, minute, second } = u;
+        const objs = [hour, minute, second];
+        let {
+            labelHour,
+            labelMinute,
+            labelSecond,
+            separator = " и ",
+            displayHour = true,
+            displayMinute = true,
+            displaySecond = true,
+        } = options;
+        let [hVal, mVal, sVal] = String(string).split(/\D+/);
+        let result = "";
+        const regOne = new RegExp(`${nums[1][1]}$`);
+        const regTwo = new RegExp(`${nums[1][2]}$`);
+
+        [hVal, mVal, sVal] = [hVal, mVal, sVal].map(nums2wordsBG);
+        [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e, i) => setOne(e, objs[i]));
+
+        if (hVal === nums[1][2]) {
+            hour.label = hour.gender[2];
+        }
+
+        if (hVal.match(regOne)) {
+            hVal = hVal.replace(regOne, hour.gender[1]);
+        } else if (hVal.match(regTwo)) {
+            hVal = hVal.replace(regTwo, hour.gender[2]);
+        }
+        if (mVal.match(regOne)) {
+            mVal = mVal.replace(regOne, minute.gender[1]);
+        }
+        if (sVal.match(regOne)) {
+            sVal = sVal.replace(regOne, second.gender[1]);
+        }
+
+        const mOrs = displayMinute && !displaySecond;
+        const sOrm = !displayMinute && displaySecond;
+        const mAnds = displayMinute && displaySecond;
+
+        if (displayHour) {
+            result += hVal + " " + (labelHour ? labelHour : hour.label);
+            if (mOrs ^ sOrm) {
+                result += separator;
+            } else if (mOrs || sOrm || mAnds) {
+                result += ", ";
+            }
+        }
+        if (displayMinute) {
+            result += mVal + " " + (labelMinute ? labelMinute : minute.label);
+            result += displaySecond ? separator : "";
+        }
+        if (displaySecond) {
+            result += sVal + " " + (labelSecond ? labelSecond : second.label);
+        }
+
+        return result;
+
+        function setOne(val, obj) {
+            if (val === nums[1][1]) {
+                val = obj.gender[1];
+                obj.label = obj.singular;
+            }
+            return val;
+        }
+
+        function getTime() {
+            return {
+                hour: {
+                    label: "часа",
+                    singular: "час",
+                    gender: { 1: "един", 2: "два" },
+                },
+                minute: {
+                    label: "минути",
+                    singular: "минута",
+                    gender: { 1: "една" },
+                },
+                second: {
+                    label: "секунди",
+                    singular: "секунда",
+                    gender: { 1: "една" },
+                },
+            };
+        }
+    }
+
     if (!string) {
         nums2wordsBG.numbers = nums;
         nums2wordsBG.currency = currency;
+        nums2wordsBG.time = time;
     } else {
         return translate(string);
     }
