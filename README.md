@@ -40,5 +40,28 @@ nums2wordsBG.time("10:59:03"); // десет часа, петдесет и де�
 nums2wordsBG.time("1:30:4", { displayMinute: false, labelHour: "часа" }); // един часа и четири секунди
 ```
 
+Добавяне на валута:
+```javascript
+// define function which returns this structure:
+const myCurrency = function () {
+    return {
+        xyz: {
+            labelBig: "xyz_лева",
+            labelSmall: "xyz_стотинки",
+            singular: { lv: "xyz_лев", st: "xyz_стотинка" },
+            decimals: 100,
+            def: { lv: "m", st: "f" },
+            gender: {
+                1: { m: "един", f: "една" },
+                2: { m: "два", f: "две" },
+            },
+        },
+    };
+};
+
+// invoke `currency`, using the third argument (defined above)
+nums2wordsBG.currency("11.01", { currency: "xyz" }, myCurrency) // единадесет xyz_лева и една xyz_стотинка
+```
+
 The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример. [Повече](https://github.com/vidul-nikolaev-petrov/nums2wordsBG/tree/main/spec) примери в тестовете.
 
