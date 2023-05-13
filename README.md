@@ -10,7 +10,7 @@ npm i nums2words-bg
 ## Usage
 
 ```javascript
-const nums2wordsBG = require('nums2words-bg');
+import nums2wordsBG from "nums2words-bg";
 
 nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
 
