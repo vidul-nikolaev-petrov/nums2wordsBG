@@ -1,4 +1,4 @@
-const translate = require("../src/index");
+import translate from "../src/index.js";
 
 describe("currency CNY tests", () => {
     it("следва да върне 'нула юана и нула фена'", () => {

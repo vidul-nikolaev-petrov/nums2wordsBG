@@ -10,7 +10,7 @@ const nums = {
         7: "седем",
         8: "осем",
         9: "девет",
-        gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
+        gender: { 1: { m: "един", n: "едно", f: "една" }, 2: { m: "два", f: "две" } },
     },
     2: {
         10: "десет",
@@ -70,7 +70,9 @@ const nums = {
     },
 };
 
-function nums2wordsBG(string) {
+nums2wordsBG();
+
+export default function nums2wordsBG(string) {
     function translate(string) {
         return applyUnions(_translate(string)).join(" ");
 
@@ -297,15 +299,21 @@ function nums2wordsBG(string) {
                     singular: { lv: "лев", st: "стотинка" },
                     decimals: 100,
                     def: { lv: "m", st: "f" },
-                    gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
+                    gender: {
+                        1: { m: nums[1].gender[1].m, f: nums[1].gender[1].f },
+                        2: { m: nums[1].gender[2].m, f: nums[1].gender[2].f },
+                    },
                 },
                 btc: {
                     labelBig: "биткойна",
                     labelSmall: "сатоши",
                     singular: { lv: "биткойн", st: "сатоши" },
                     decimals: 100000000,
-                    def: { lv: "m", st: "f" },
-                    gender: { 1: { m: "един", f: "едно" }, 2: { m: "два", f: "две" } },
+                    def: { lv: "m", st: "n" },
+                    gender: {
+                        1: { m: nums[1].gender[1].m, n: nums[1].gender[1].n },
+                        2: { m: nums[1].gender[2].m, n: nums[1].gender[2].n },
+                    },
                 },
                 cny: {
                     labelBig: "юана",
@@ -313,7 +321,10 @@ function nums2wordsBG(string) {
                     singular: { lv: "юан", st: "фен" },
                     decimals: 100,
                     def: { lv: "m", st: "m" },
-                    gender: { 1: { m: "един" }, 2: { m: "два" } },
+                    gender: {
+                        1: { m: nums[1].gender[1].m },
+                        2: { m: nums[1].gender[2].m },
+                    },
                 },
                 rub: {
                     labelBig: "рубли",
@@ -321,7 +332,10 @@ function nums2wordsBG(string) {
                     singular: { lv: "рубла", st: "копейка" },
                     decimals: 100,
                     def: { lv: "f", st: "f" },
-                    gender: { 1: { f: "една" }, 2: { f: "две" } },
+                    gender: {
+                        1: { f: nums[1].gender[1].f },
+                        2: { f: nums[1].gender[2].f },
+                    },
                 },
                 usd: {
                     labelBig: "долара",
@@ -329,7 +343,10 @@ function nums2wordsBG(string) {
                     singular: { lv: "долар", st: "цент" },
                     decimals: 100,
                     def: { lv: "m", st: "m" },
-                    gender: { 1: { m: "един" }, 2: { m: "два" } },
+                    gender: {
+                        1: { m: nums[1].gender[1].m },
+                        2: { m: nums[1].gender[2].m },
+                    },
                 },
             };
         }
@@ -411,17 +428,17 @@ function nums2wordsBG(string) {
                 hour: {
                     label: "часа",
                     singular: "час",
-                    gender: { 1: "един", 2: "два" },
+                    gender: { 1: nums[1].gender[1].m, 2: nums[1].gender[2].m },
                 },
                 minute: {
                     label: "минути",
                     singular: "минута",
-                    gender: { 1: "една" },
+                    gender: { 1: nums[1].gender[1].f },
                 },
                 second: {
                     label: "секунди",
                     singular: "секунда",
-                    gender: { 1: "една" },
+                    gender: { 1: nums[1].gender[1].f },
                 },
             };
         }
@@ -434,10 +451,4 @@ function nums2wordsBG(string) {
     } else {
         return translate(string);
     }
-}
-
-nums2wordsBG();
-
-if (typeof module !== "undefined" && module.exports) {
-    module.exports = nums2wordsBG;
 }

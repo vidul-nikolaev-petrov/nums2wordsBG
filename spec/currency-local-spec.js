@@ -1,4 +1,4 @@
-const translate = require("../src/index");
+import translate from "../src/index.js";
 
 describe("local currency tests", () => {
     it("следва да върне 'нула лева и нула стотинки'", () => {

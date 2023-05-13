@@ -1,4 +1,4 @@
-const translate = require("../src/index");
+ import translate from "../src/index.js";
 
 describe("time tests", () => {
     it("следва да върне 'нула часа, нула минути и нула секунди'", () => {
