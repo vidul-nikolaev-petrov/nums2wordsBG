@@ -42,7 +42,7 @@ nums2wordsBG.time("1:30:4", { displayMinute: false, labelHour: "часа" }); //
 
 Добавяне на валута:
 ```javascript
-// define function which returns this structure:
+// define function which returns such structure:
 const myCurrency = function () {
     return {
         xyz: {

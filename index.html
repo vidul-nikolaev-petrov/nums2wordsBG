@@ -3,7 +3,10 @@
     <head>
         <title>Number to Words Example</title>
         <meta charset="UTF-8" />
-        <script src="src/index.js"></script>
+        <script type="module">
+            import nums2wordsBG from "./src/index.js";
+            window.nums2wordsBG = nums2wordsBG;
+        </script>
         <link
             href="https://fonts.googleapis.com/css?family=Didact Gothic"
             rel="stylesheet"
@@ -83,35 +86,35 @@
                 id="input"
                 class="input"
                 onkeyup="outputNumber('input', nums2wordsBG)"
-            /><br>
+            /><br />
             <input
                 type="number"
                 placeholder="Въведете сума в левове 🇧🇬"
                 id="input-c1"
                 class="input"
                 onkeyup="outputNumber('input-c1', nums2wordsBG.currency)"
-            /><br>
+            /><br />
             <input
                 type="number"
                 placeholder="Въведете биткойн сума ₿"
                 id="input-8"
                 class="input"
                 onkeyup="outputNumber('input-8', nums2wordsBG.currency, {currency: 'btc'})"
-            /><br>
+            /><br />
             <input
                 type="number"
                 placeholder="Въведете сума в юани 🇨🇳"
                 id="input-c4"
                 class="input"
                 onkeyup="outputNumber('input-c4', nums2wordsBG.currency, {currency: 'cny'})"
-            /><br>
+            /><br />
             <input
                 type="number"
                 placeholder="Въведете сума в рубли 🇷🇺"
                 id="input-c2"
                 class="input"
                 onkeyup="outputNumber('input-c2', nums2wordsBG.currency, {currency: 'rub'})"
-            /><br>
+            /><br />
             <input
                 type="number"
                 placeholder="Въведете сума в долари 🇺🇸"
@@ -124,7 +127,8 @@
         <script>
             let timer;
             let previousNumber;
-            function outputNumber(input, f, options = {currency: "bgn"} ) {
+
+            function outputNumber(input, f, options = { currency: "bgn" }) {
                 const inputElement = document.getElementById(input);
                 const outputElement = document.getElementById("output");
                 const number = inputElement.value;
