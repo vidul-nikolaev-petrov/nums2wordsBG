@@ -10,7 +10,7 @@ const nums = {
         7: "седем",
         8: "осем",
         9: "девет",
-        gender: { 1: { m: "един", n: "едно", f: "една" }, 2: { m: "два", f: "две" } },
+        gender: { 1: { m: "един", f: "една" }, 2: { m: "два", f: "две" } },
     },
     2: {
         10: "десет",
@@ -311,8 +311,8 @@ export default function nums2wordsBG(string) {
                     decimals: 100000000,
                     def: { lv: "m", st: "n" },
                     gender: {
-                        1: { m: nums[1].gender[1].m, n: nums[1].gender[1].n },
-                        2: { m: nums[1].gender[2].m, n: nums[1].gender[2].n },
+                        1: { m: nums[1].gender[1].m, n: nums[1][1] },
+                        2: { m: nums[1].gender[2].m, n: nums[1][2] },
                     },
                 },
                 cny: {

@@ -19,6 +19,12 @@ describe("BTC currency tests", () => {
         );
     });
 
+    it("следва да върне 'нула биткойна и две сатоши'", () => {
+        expect(translate.currency(".00000002", { currency: "btc" })).toBe(
+            "нула биткойна и две сатоши"
+        );
+    });
+
     it("следва да върне 'един биткойн и един милион сатоши'", () => {
         expect(translate.currency("1.01", { currency: "btc" })).toBe(
             "един биткойн и един милион сатоши"
