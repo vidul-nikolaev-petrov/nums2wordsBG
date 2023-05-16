@@ -272,19 +272,8 @@ export default function nums2wordsBG(string) {
             st = nums[1][0];
         }
 
-        const regOne = new RegExp(`${nums[1][1]}$`);
-        const regTwo = new RegExp(`${nums[1][2]}$`);
-
-        if (lv.match(regOne)) {
-            lv = lv.replace(regOne, c.gender[1][defBig]);
-        } else if (lv.match(regTwo)) {
-            lv = lv.replace(regTwo, c.gender[2][defBig]);
-        }
-        if (st.match(regOne)) {
-            st = st.replace(regOne, c.gender[1][defSmall]);
-        } else if (st.match(regTwo)) {
-            st = st.replace(regTwo, c.gender[2][defSmall]);
-        }
+        lv = replaceOneOrTwo(lv, c.gender[1][defBig], c.gender[2][defBig]);
+        st = replaceOneOrTwo(st, c.gender[1][defSmall], c.gender[2][defSmall]);
 
         result = displayBig ? lv + " " + labelBig + (displaySmall ? separator : "") : "";
         result += displaySmall ? st + " " + labelSmall : "";
@@ -371,27 +360,13 @@ export default function nums2wordsBG(string) {
         } = options;
         let [hVal, mVal, sVal] = String(string).split(/\D+/);
         let result = "";
-        const regOne = new RegExp(`${nums[1][1]}$`);
-        const regTwo = new RegExp(`${nums[1][2]}$`);
 
         [hVal, mVal, sVal] = [hVal, mVal, sVal].map(nums2wordsBG);
         [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e, i) => setOne(e, objs[i]));
 
-        if (hVal === nums[1][2]) {
-            hour.label = hour.gender[2];
-        }
-
-        if (hVal.match(regOne)) {
-            hVal = hVal.replace(regOne, hour.gender[1]);
-        } else if (hVal.match(regTwo)) {
-            hVal = hVal.replace(regTwo, hour.gender[2]);
-        }
-        if (mVal.match(regOne)) {
-            mVal = mVal.replace(regOne, minute.gender[1]);
-        }
-        if (sVal.match(regOne)) {
-            sVal = sVal.replace(regOne, second.gender[1]);
-        }
+        hVal = replaceOneOrTwo(hVal, hour.gender[1], hour.gender[2]);
+        mVal = replaceOneOrTwo(mVal, minute.gender[1]);
+        sVal = replaceOneOrTwo(sVal, second.gender[1]);
 
         const mOrs = displayMinute && !displaySecond;
         const sOrm = !displayMinute && displaySecond;
@@ -415,14 +390,6 @@ export default function nums2wordsBG(string) {
 
         return result;
 
-        function setOne(val, obj) {
-            if (val === nums[1][1]) {
-                val = obj.gender[1];
-                obj.label = obj.singular;
-            }
-            return val;
-        }
-
         function getTime() {
             return {
                 hour: {
@@ -444,9 +411,97 @@ export default function nums2wordsBG(string) {
         }
     }
 
+    function date(string, options = {}) {
+        const { label, separator = " и ", format = "d/m/y" } = options;
+        const map = {
+            d: "day",
+            w: "week",
+            m: "month",
+            y: "year",
+            a: "age",
+        };
+        const units = format.split(/\W+/);
+        const u = getDate()[map[units[0].toLowerCase()]];
+        const ss = String(string).split(/\W+/);
+        const reFirstUnut = (e) => e.replace(/^\w+\W+/, "");
+        let val = nums2wordsBG(String(ss[0]));
+
+        val = setOne(val, u);
+        val = replaceOneOrTwo(val, u.gender[1], u.gender[2]);
+        val += " " + (label ? label : u.label);
+
+        if (units.length > 1) {
+            val += separator;
+        } else if (units.length === 1) {
+            return val;
+        }
+
+        return [val]
+            .concat(
+                date(reFirstUnut(string), {
+                    label,
+                    separator,
+                    format: reFirstUnut(format),
+                })
+            )
+            .join("");
+
+        function getDate() {
+            return {
+                age: {
+                    label: "века",
+                    singular: "век",
+                    gender: { 1: nums[1].gender[1].m, 2: nums[1].gender[2].m },
+                },
+                year: {
+                    label: "години",
+                    singular: "година",
+                    gender: { 1: nums[1].gender[1].f, 2: nums[1].gender[2].f },
+                },
+                month: {
+                    label: "месеца",
+                    singular: "месец",
+                    gender: { 1: nums[1].gender[1].m, 2: nums[1].gender[2].m },
+                },
+                week: {
+                    label: "седмици",
+                    singular: "сецмица",
+                    gender: { 1: nums[1].gender[1].f, 2: nums[1].gender[2].f },
+                },
+                day: {
+                    label: "дена",
+                    singular: "ден",
+                    gender: { 1: nums[1].gender[1].m, 2: nums[1].gender[2].m },
+                },
+            };
+        }
+    }
+
+    function replaceOneOrTwo(unit, replaceOne, replaceTwo) {
+        const regOne = new RegExp(`${nums[1][1]}$`);
+        const regTwo = new RegExp(`${nums[1][2]}$`);
+
+        if (unit.match(regOne)) {
+            return unit.replace(regOne, replaceOne);
+        } else if (replaceTwo && unit.match(regTwo)) {
+            return unit.replace(regTwo, replaceTwo);
+        } else {
+            return unit;
+        }
+    }
+
+    function setOne(val, obj) {
+        if (val === nums[1][1]) {
+            val = obj.gender[1];
+            obj.label = obj.singular;
+        }
+        return val;
+    }
+
     if (!string) {
         nums2wordsBG.numbers = nums;
         nums2wordsBG.currency = currency;
+        nums2wordsBG.date = date;
         nums2wordsBG.time = time;
     } else {
         return translate(string);

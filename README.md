@@ -38,6 +38,11 @@ nums2wordsBG.currency("1.99", { currency: "usd" }); // един долар и д
 nums2wordsBG.time("00:01:01"); // "нула часа, една минута и една секунда"
 nums2wordsBG.time("10:59:03"); // десет часа, петдесет и девет минути и три секунди
 nums2wordsBG.time("1:30:4", { displayMinute: false, labelHour: "часа" }); // един часа и четири секунди
+
+// date
+nums2wordsBG.date("2 8 301", { format: "a,y,d", separator: ", " }); // два века, осем години, триста и един дена
+nums2wordsBG.date("2 6", { format: "w,d" }); // две седмици и шест дена
+nums2wordsBG.date("1.1.1.1", { format: "a/y/d/m", separator: ", " })); // "един век, една година, един ден, един месец"
 ```
 
 Добавяне на валута:
