@@ -412,7 +412,7 @@ export default function nums2wordsBG(string) {
     }
 
     function date(string, options = {}) {
-        const { label, separator = " и ", format = "d/m/y" } = options;
+        const { labels = {}, separator = " и ", format = "d/m/y" } = options;
         const map = {
             d: "day",
             w: "week",
@@ -421,14 +421,15 @@ export default function nums2wordsBG(string) {
             a: "age",
         };
         const units = format.split(/\W+/);
-        const u = getDate()[map[units[0].toLowerCase()]];
+        const unitName = units[0].toLowerCase();
+        const u = getDate()[map[unitName]];
         const ss = String(string).split(/\W+/);
         const reFirstUnut = (e) => e.replace(/^\w+\W+/, "");
         let val = nums2wordsBG(String(ss[0]));
 
         val = setOne(val, u);
         val = replaceOneOrTwo(val, u.gender[1], u.gender[2]);
-        val += " " + (label ? label : u.label);
+        val += " " + (labels[unitName] ? labels[unitName] : u.label);
 
         if (units.length > 1) {
             val += separator;
@@ -439,7 +440,7 @@ export default function nums2wordsBG(string) {
         return [val]
             .concat(
                 date(reFirstUnut(string), {
-                    label,
+                    labels,
                     separator,
                     format: reFirstUnut(format),
                 })
