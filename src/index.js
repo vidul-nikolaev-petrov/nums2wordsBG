@@ -425,7 +425,7 @@ export default function nums2wordsBG(string) {
         const u = getDate()[map[unitName]];
         const ss = String(string).split(/\W+/);
         const reFirstUnut = (e) => e.replace(/^\w+\W+/, "");
-        let val = nums2wordsBG(String(ss[0]));
+        let val = nums2wordsBG(ss[0]);
 
         val = setOne(val, u);
         val = replaceOneOrTwo(val, u.gender[1], u.gender[2]);
