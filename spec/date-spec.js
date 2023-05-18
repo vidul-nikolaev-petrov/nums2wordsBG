@@ -5,7 +5,9 @@ describe("time tests", () => {
         expect(translate.date("1465", { format: "d", separator: ", " })).toBe(
             "хиляда четиристотин шестдесет и пет дена"
         );
+    });
 
+    it("следва да върне 'един век, една година, един ден, един месец'", () => {
         expect(translate.date("1.1.1.1", { format: "a/y/d/m", separator: ", " })).toBe(
             "един век, една година, един ден, един месец"
         );

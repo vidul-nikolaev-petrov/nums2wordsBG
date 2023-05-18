@@ -72,7 +72,7 @@ const nums = {
 
 nums2wordsBG();
 
-export default function nums2wordsBG(string) {
+export default function nums2wordsBG(string, options = { gender: "" }) {
     function translate(string) {
         return applyUnions(_translate(string)).join(" ");
 
@@ -225,6 +225,19 @@ export default function nums2wordsBG(string) {
                         result[i] = result[i] + ",";
                     }
                 });
+            })();
+
+            (function defineGenderForLastNumber() {
+                const lastWord = result[result.length - 1];
+                const lastNum = string.split("").pop();
+
+                if (
+                    options.gender &&
+                    (lastWord === nums[1][1] || lastWord === nums[1][2])
+                ) {
+                    result.pop();
+                    result.push(nums[1].gender[lastNum][options.gender]);
+                }
             })();
 
             return result;

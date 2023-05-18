@@ -43,6 +43,12 @@ nums2wordsBG.time("1:30:4", { displayMinute: false, labelHour: "часа" }); //
 nums2wordsBG.date("2 8 301", { format: "a,y,d", separator: ", " }); // два века, осем години, триста и един дена
 nums2wordsBG.date("2 6", { format: "w,d" }); // две седмици и шест дена
 nums2wordsBG.date("1.1.1.1", { format: "a/y/d/m", separator: ", " })); // "един век, една година, един ден, един месец"
+
+// various units
+nums2wordsBG.("1", { gender: "f" }) + " вилица"; // една вилица
+nums2wordsBG.("1001", { gender: "m" }) + " километра"; // хиляда и един километра
+nums2wordsBG.("102", { gender: "m" }) + " километра"; // сто и два километра
+
 ```
 
 Добавяне на валута:
