@@ -16,7 +16,7 @@ nums2wordsBG(201401); // двеста и една хиляди, четирист
 
 // currencies
 nums2wordsBG.currency("1024.81"); // хиляда двадесет и четири лева и осемдесет и една стотинки
-nums2wordsBG.currency("101.1", {separator: ", "}); // сто и един лева и десет стотинки
+nums2wordsBG.currency("10122.1", {separator: ", "}); // десет хиляди, сто двадесет и два лева, десет стотинки
 nums2wordsBG.currency("21001.01", { labelBig: "лв.", labelSmall: "ст." }); // двадесет и една хиляди и един лв. и една ст.
 nums2wordsBG.currency("11", {displaySmall: false}); // единадесет лева
 nums2wordsBG.currency("0.11", {displayBig: false}); // единадесет стотинки
