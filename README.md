@@ -12,7 +12,7 @@ npm i nums2words-bg
 ```javascript
 import nums2wordsBG from "nums2words-bg";
 
-nums2wordsBG(201401); // двеста и една хиляди, четиристотин и едно
+nums2wordsBG("201401"); // двеста и една хиляди, четиристотин и едно
 
 // currencies
 nums2wordsBG.currency("1024.81"); // хиляда двадесет и четири лева и осемдесет и една стотинки
