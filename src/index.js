@@ -148,8 +148,9 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
 
             for (let i = 0; i < words.length; i++) {
                 const e = words[i];
-                let counter = 0;
+
                 result.push(e);
+
                 if (keyWords[e]) {
                     if (words[i - 1] && words[i - 2]) {
                         if (!keyWords[words[i - 1]] && !keyWords[words[i - 2]]) {
@@ -194,16 +195,17 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
             (function specialCases() {
                 const replace = { две: nums[1].gender[2].m, едно: nums[1].gender[1].m };
                 const replace1000 = { едно: nums[1].gender[1].f };
+                const keyWords = {
+                    милиона: true,
+                    милиарда: true,
+                    трилион: true,
+                    трилиона: true,
+                    квадрилиона: true,
+                    квинтилиона: true,
+                };
 
                 result.forEach((e, i) => {
-                    if (
-                        e === "милиона" ||
-                        e === "милиарда" ||
-                        e === "трилион" ||
-                        e === "трилиона" ||
-                        e === "квадрилиона" ||
-                        e === "квинтилиона"
-                    ) {
+                    if (keyWords.hasOwnProperty(e)) {
                         if (replace[result[i - 1]]) {
                             result[i - 1] = replace[result[i - 1]];
                         }
