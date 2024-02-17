@@ -50,7 +50,6 @@ const nums = {
     5: {
         1: ["един милион", "един милиона"],
         "*": "милиона",
-        gender: { 2: "два" },
     },
     6: {
         1: ["един милиард", "един милиарда"],
@@ -193,7 +192,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
             })();
 
             (function specialCases() {
-                const replace = { две: nums[5].gender[2], едно: nums[1].gender[1].m };
+                const replace = { две: nums[1].gender[2].m, едно: nums[1].gender[1].m };
                 const replace1000 = { едно: nums[1].gender[1].f };
 
                 result.forEach((e, i) => {
