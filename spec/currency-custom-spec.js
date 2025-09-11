@@ -9,10 +9,10 @@ const euro = function () {
             labelSmall: "цента",
             singular: { lv: "евро", st: "цент" },
             decimals: 100,
-            def: { lv: "f", st: "m" },
+            def: { lv: "n", st: "m" },
             gender: {
-                1: { f: "едно", m: "един" },
-                2: { f: "двe", m: "два" },
+                1: { n: "едно", m: "един" },
+                2: { n: "двe", m: "два" },
             },
         },
     };
