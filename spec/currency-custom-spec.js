@@ -85,6 +85,31 @@ const cases = [
         options: { currency: "euro" },
     },
     {
+        input: "21.01",
+        expected: "двадесет и едно евро и един цент",
+        options: { currency: "euro" },
+    },
+    {
+        input: "21.02",
+        expected: "двадесет и едно евро и два цента",
+        options: { currency: "euro" },
+    },
+    {
+        input: "421.21",
+        expected: "четиристотин двадесет и едно евро и двадесет и един цента",
+        options: { currency: "euro" },
+    },
+    {
+        input: "1021.61",
+        expected: "хиляда двадесет и едно евро и шестдесет и един цента",
+        options: { currency: "euro" },
+    },
+    {
+        input: "81021.39",
+        expected: "осемдесет и една хиляди, двадесет и едно евро и тридесет и девет цента",
+        options: { currency: "euro" },
+    },
+    {
         input: "21000.02",
         expected: "двадесет и една хиляди евро и два цента",
         options: { currency: "euro" },
@@ -93,6 +118,26 @@ const cases = [
         input: "58000400091.01",
         expected:
             "петдесет и осем милиарда, четиристотин хиляди, деветдесет и едно евро и един цент",
+        options: { currency: "euro" },
+    },
+    {
+        input: "880000000000000.21",
+        expected: "осемстотин и осемдесет трилиона евро и двадесет и един цента",
+        options: { currency: "euro" },
+    },
+    {
+        input: "21000000000000000.01",
+        expected: "двадесет и един квадрилиона евро и един цент",
+        options: { currency: "euro" },
+    },
+    {
+        input: "1000000000000000000.21",
+        expected: "един квинтилион евро и двадесет и един цента",
+        options: { currency: "euro" },
+    },
+    {
+        input: "991000000000000000000.11",
+        expected: "деветстотин деветдесет и един квинтилиона евро и единадесет цента",
         options: { currency: "euro" },
     },
 ];
