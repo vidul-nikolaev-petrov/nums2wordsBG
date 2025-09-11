@@ -11,9 +11,23 @@
             href="https://fonts.googleapis.com/css?family=Didact Gothic"
             rel="stylesheet"
         />
-        <link rel="apple-touch-icon" sizes="180x180" href="fav/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="fav/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="fav/favicon-16x16.png" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="fav/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="fav/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="fav/favicon-16x16.png"
+        />
         <link rel="manifest" href="fav/site.webmanifest" />
         <style>
             body {
@@ -122,13 +136,41 @@
                 class="input"
                 onkeyup="outputNumber('input-c3', nums2wordsBG.currency, {currency: 'usd'})"
             />
+            <input
+                type="number"
+                placeholder="Въведете сума в евро 🇪🇺"
+                id="input-c10"
+                class="input"
+                onkeyup="outputNumber('input-c10', nums2wordsBG.currency, {currency: 'euro'}, currencyEuro)"
+            />
         </div>
         <p id="output" class="transition"></p>
         <script>
             let timer;
             let previousNumber;
 
-            function outputNumber(input, f, options = { currency: "bgn" }) {
+            const currencyEuro = function () {
+                return {
+                    euro: {
+                        labelBig: "евро",
+                        labelSmall: "цента",
+                        singular: { lv: "евро", st: "цент" },
+                        decimals: 100,
+                        def: { lv: "f", st: "m" },
+                        gender: {
+                            1: { f: "едно", m: "един" },
+                            2: { f: "двe", m: "два" },
+                        },
+                    },
+                };
+            };
+
+            function outputNumber(
+                input,
+                f,
+                options = { currency: "bgn" },
+                struct = null
+            ) {
                 const inputElement = document.getElementById(input);
                 const outputElement = document.getElementById("output");
                 const number = inputElement.value;
@@ -140,7 +182,15 @@
                     }
                     outputElement.classList.remove("show");
                     timer = setTimeout(() => {
-                        outputElement.innerHTML = f(number, options);
+                        if (struct) {
+                            outputElement.innerHTML = f(
+                                number,
+                                options,
+                                struct
+                            );
+                        } else {
+                            outputElement.innerHTML = f(number, options);
+                        }
                         outputElement.classList.add("show");
                     }, 256);
                 } else {
