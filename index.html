@@ -141,7 +141,7 @@
                 placeholder="Въведете сума в евро 🇪🇺"
                 id="input-c10"
                 class="input"
-                onkeyup="outputNumber('input-c10', nums2wordsBG.currency, {currency: 'euro'}, euro)"
+                onkeyup="outputNumber('input-c10', nums2wordsBG.currency, {currency: 'euro'})"
             />
         </div>
         <p id="output" class="transition"></p>
@@ -149,21 +149,21 @@
             let timer;
             let previousNumber;
 
-            const euro = function () {
-                return {
-                    euro: {
-                        labelBig: "евро",
-                        labelSmall: "цента",
-                        singular: { lv: "евро", st: "цент" },
-                        decimals: 100,
-                        def: { lv: "n", st: "m" },
-                        gender: {
-                            1: { n: "едно", m: "един" },
-                            2: { n: "двe", m: "два" },
-                        },
-                    },
-                };
-            };
+            // const euro = function () {
+            //     return {
+            //         euro: {
+            //             labelBig: "евро",
+            //             labelSmall: "цента",
+            //             singular: { lv: "евро", st: "цент" },
+            //             decimals: 100,
+            //             def: { lv: "n", st: "m" },
+            //             gender: {
+            //                 1: { n: "едно", m: "един" },
+            //                 2: { n: "двe", m: "два" },
+            //             },
+            //         },
+            //     };
+            // };
 
             function outputNumber(
                 input,

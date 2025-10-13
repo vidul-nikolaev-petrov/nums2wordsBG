@@ -153,7 +153,10 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
 
                 if (keyWords[e]) {
                     if (words[i - 1] && words[i - 2]) {
-                        if (!keyWords[words[i - 1]] && !keyWords[words[i - 2]]) {
+                        if (
+                            !keyWords[words[i - 1]] &&
+                            !keyWords[words[i - 2]]
+                        ) {
                             result.splice(-2);
                             result.push(union, words[i - 1], words[i]);
                         }
@@ -187,13 +190,19 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
 
                 result = result.concat(tmp);
 
-                if (keyWords[result.slice(-1)[0]] && keyWords[result.slice(-3, -2)[0]]) {
+                if (
+                    keyWords[result.slice(-1)[0]] &&
+                    keyWords[result.slice(-3, -2)[0]]
+                ) {
                     result.splice(-2, 0, union);
                 }
             })();
 
             (function specialCases() {
-                const replace = { две: nums[1].gender[2].m, едно: nums[1].gender[1].m };
+                const replace = {
+                    две: nums[1].gender[2].m,
+                    едно: nums[1].gender[1].m,
+                };
                 const replace1000 = { едно: nums[1].gender[1].f };
                 const keyWords = {
                     милиона: true,
@@ -209,7 +218,10 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
                         if (replace[result[i - 1]]) {
                             result[i - 1] = replace[result[i - 1]];
                         }
-                    } else if (e === nums[4]["*"] && replace1000[result[i - 1]]) {
+                    } else if (
+                        e === nums[4]["*"] &&
+                        replace1000[result[i - 1]]
+                    ) {
                         result[i - 1] = replace1000[result[i - 1]];
                     }
                 });
@@ -289,7 +301,9 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
         lv = replaceOneOrTwo(lv, c.gender[1][defBig], c.gender[2][defBig]);
         st = replaceOneOrTwo(st, c.gender[1][defSmall], c.gender[2][defSmall]);
 
-        result = displayBig ? lv + " " + labelBig + (displaySmall ? separator : "") : "";
+        result = displayBig
+            ? lv + " " + labelBig + (displaySmall ? separator : "")
+            : "";
         result += displaySmall ? st + " " + labelSmall : "";
 
         return result;
@@ -327,6 +341,17 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
                     gender: {
                         1: { m: nums[1].gender[1].m },
                         2: { m: nums[1].gender[2].m },
+                    },
+                },
+                eur: {
+                    labelBig: "евро",
+                    labelSmall: "цента",
+                    singular: { lv: "евро", st: "цент" },
+                    decimals: 100,
+                    def: { lv: "n", st: "m" },
+                    gender: {
+                        1: { n: nums[1][1], m: nums[1].gender[1].m },
+                        2: { n: nums[1][2], m: nums[1].gender[2].m },
                     },
                 },
                 rub: {
@@ -376,7 +401,9 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
         let result = "";
 
         [hVal, mVal, sVal] = [hVal, mVal, sVal].map(nums2wordsBG);
-        [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e, i) => setOne(e, objs[i]));
+        [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e, i) =>
+            setOne(e, objs[i])
+        );
 
         hVal = replaceOneOrTwo(hVal, hour.gender[1], hour.gender[2]);
         mVal = replaceOneOrTwo(mVal, minute.gender[1]);
