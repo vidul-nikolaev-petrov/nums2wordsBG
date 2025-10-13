@@ -17,7 +17,7 @@
         "Bulgarian"
     ],
     "scripts": {
-        "test": "jasmine --color --fail-fast"
+        "tests": "jasmine --color --fail-fast"
     },
     "devDependencies": {
         "jasmine": "4.6.0"
