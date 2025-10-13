@@ -1,4 +1,5 @@
 # nums2wordsBG 🇧🇬
+
 Преобразува числата в думи (converts numbers to words in Bulgarian).
 
 ## Install
@@ -28,6 +29,9 @@ nums2wordsBG.currency(".208000", {currency: "btc"}); // нула биткойн�
 nums2wordsBG.currency("1.01", { currency: "cny" }); // един юан и един фен
 nums2wordsBG.currency("21001.59", { currency: "cny" }); // двадесет и една хиляди и един юана и петдесет и девет фена
 
+nums2wordsBG.currency("1.01", { currency: "eur" }); // едно евро и един цент
+nums2wordsBG.currency("512.21", { currency: "eur" }); // петстотин и дванадесет евро и двадесет и един цента
+
 nums2wordsBG.currency("01.01", {currency: "rub"}); // една рубла и една копейка
 nums2wordsBG.currency("21015.01", {currency: "rub"}); // двадесет и една хиляди и петнадесет рубли и една копейка
 
@@ -52,6 +56,7 @@ nums2wordsBG("102", { gender: "m" }) + " километра"; // сто и дв�
 ```
 
 Добавяне на валута:
+
 ```javascript
 // define function which returns such structure:
 const myCurrency = function () {
@@ -71,8 +76,7 @@ const myCurrency = function () {
 };
 
 // invoke `currency`, using the third argument (defined above)
-nums2wordsBG.currency("11.01", { currency: "xyz" }, myCurrency) // единадесет xyz_лева и една xyz_стотинка
+nums2wordsBG.currency("11.01", { currency: "xyz" }, myCurrency); // единадесет xyz_лева и една xyz_стотинка
 ```
 
 The library is written in vanilla JS. [Онлайн](https://vidul-nikolaev-petrov.github.io/nums2wordsBG) пример. [Повече](https://github.com/vidul-nikolaev-petrov/nums2wordsBG/tree/main/spec) примери в тестовете.
-
