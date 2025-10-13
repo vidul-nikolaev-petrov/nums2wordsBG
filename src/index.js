@@ -71,7 +71,7 @@ const nums = {
 
 nums2wordsBG();
 
-export default function nums2wordsBG(string, options = { gender: "" }) {
+export default function nums2wordsBG(string, options = {}) {
     function translate(string) {
         return applyUnions(_translate(string)).join(" ");
 
@@ -129,8 +129,8 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
 
         function applyUnions(words) {
             let result = [];
-            const union = "и";
-            const comma = ",";
+            const union = options.grammer?.union ?? "и";
+            const comma = options.grammer?.comma ?? ",";
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
@@ -235,7 +235,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
                         result[i + 1] !== union &&
                         e !== nums[4][1][0]
                     ) {
-                        result[i] = result[i] + ",";
+                        result[i] = result[i] + comma;
                     }
                 });
             })();
@@ -269,6 +269,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
             separator = " и ",
             displayBig = true,
             displaySmall = true,
+            grammer = null,
         } = options;
         let [lv, st] = String(string).split(/\D+/);
         let result;
@@ -280,7 +281,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
             st = st.toFixed(0);
         }
 
-        [lv, st] = [lv, st].map(nums2wordsBG);
+        [lv, st] = [lv, st].map((e) => nums2wordsBG(e, { grammer }));
 
         if (lv === nums[1][1]) {
             if (labelBig === c.labelBig) {
@@ -453,7 +454,12 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
     }
 
     function date(string, options = {}) {
-        const { labels = {}, separator = " и ", format = "d/m/y" } = options;
+        const {
+            labels = {},
+            separator = " и ",
+            format = "d/m/y",
+            grammer = null,
+        } = options;
         const map = {
             d: "day",
             w: "week",
@@ -466,7 +472,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
         const u = getDate()[map[unitName]];
         const ss = String(string).split(/\W+/);
         const reFirstUnut = (e) => e.replace(/^\w+\W+/, "");
-        let val = nums2wordsBG(ss[0]);
+        let val = nums2wordsBG(ss[0], { grammer });
 
         val = setOne(val, u);
         val = replaceOneOrTwo(val, u.gender[1], u.gender[2]);
@@ -484,6 +490,7 @@ export default function nums2wordsBG(string, options = { gender: "" }) {
                     labels,
                     separator,
                     format: reFirstUnut(format),
+                    grammer,
                 })
             )
             .join("");
