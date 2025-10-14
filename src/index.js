@@ -130,7 +130,7 @@ export default function nums2wordsBG(string, options = {}) {
         function applyUnions(words) {
             let result = [];
             const union = options.grammer?.union ?? "и";
-            const comma = options.grammer?.comma ?? "";
+            const comma = options.grammer?.comma;
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
@@ -168,7 +168,6 @@ export default function nums2wordsBG(string, options = {}) {
             }
 
             (function checkSmallNums() {
-                const rLength = result.length - 1;
                 const lastTwo = result.slice(-2);
                 const lastThree = result.slice(-3);
                 const checkAvail = (list) =>
@@ -228,6 +227,7 @@ export default function nums2wordsBG(string, options = {}) {
             })();
 
             (function addComma() {
+                if (!comma) return;
                 result.forEach((e, i) => {
                     if (
                         keyWords[e] &&
