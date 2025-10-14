@@ -514,7 +514,7 @@ export default function nums2wordsBG(string, options = {}) {
                 },
                 week: {
                     label: "седмици",
-                    singular: "сецмица",
+                    singular: "седмица",
                     gender: { 1: nums[1].gender[1].f, 2: nums[1].gender[2].f },
                 },
                 day: {
