@@ -130,7 +130,7 @@ export default function nums2wordsBG(string, options = {}) {
         function applyUnions(words) {
             let result = [];
             const union = options.grammer?.union ?? "и";
-            const comma = options.grammer?.comma ?? ",";
+            const comma = options.grammer?.comma ?? "";
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
