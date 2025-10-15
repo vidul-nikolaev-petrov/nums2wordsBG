@@ -129,8 +129,8 @@ export default function nums2wordsBG(string, options = {}) {
 
         function applyUnions(words) {
             let result = [];
-            const union = options.grammer?.union ?? "и";
-            const comma = options.grammer?.comma;
+            const union = options.grammar?.union ?? "и";
+            const comma = options.grammar?.comma;
             const keyWords = {
                 хиляда: true,
                 хиляди: true,
@@ -269,7 +269,7 @@ export default function nums2wordsBG(string, options = {}) {
             separator = " и ",
             displayBig = true,
             displaySmall = true,
-            grammer = null,
+            grammar = null,
         } = options;
         let [lv, st] = String(string).split(/\D+/);
         let result;
@@ -281,7 +281,7 @@ export default function nums2wordsBG(string, options = {}) {
             st = st.toFixed(0);
         }
 
-        [lv, st] = [lv, st].map((e) => nums2wordsBG(e, { grammer }));
+        [lv, st] = [lv, st].map((e) => nums2wordsBG(e, { grammar }));
 
         if (lv === nums[1][1]) {
             if (labelBig === c.labelBig) {
@@ -397,11 +397,14 @@ export default function nums2wordsBG(string, options = {}) {
             displayHour = true,
             displayMinute = true,
             displaySecond = true,
+            grammar = null,
         } = options;
         let [hVal, mVal, sVal] = String(string).split(/\D+/);
         let result = "";
 
-        [hVal, mVal, sVal] = [hVal, mVal, sVal].map(nums2wordsBG);
+        [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e) =>
+            nums2wordsBG(e, { grammar })
+        );
         [hVal, mVal, sVal] = [hVal, mVal, sVal].map((e, i) =>
             setOne(e, objs[i])
         );
@@ -458,7 +461,7 @@ export default function nums2wordsBG(string, options = {}) {
             labels = {},
             separator = " и ",
             format = "d/m/y",
-            grammer = null,
+            grammar = null,
         } = options;
         const map = {
             d: "day",
@@ -472,7 +475,7 @@ export default function nums2wordsBG(string, options = {}) {
         const u = getDate()[map[unitName]];
         const ss = String(string).split(/\W+/);
         const reFirstUnut = (e) => e.replace(/^\w+\W+/, "");
-        let val = nums2wordsBG(ss[0], { grammer });
+        let val = nums2wordsBG(ss[0], { grammar });
 
         val = setOne(val, u);
         val = replaceOneOrTwo(val, u.gender[1], u.gender[2]);
@@ -490,7 +493,7 @@ export default function nums2wordsBG(string, options = {}) {
                     labels,
                     separator,
                     format: reFirstUnut(format),
-                    grammer,
+                    grammar,
                 })
             )
             .join("");
