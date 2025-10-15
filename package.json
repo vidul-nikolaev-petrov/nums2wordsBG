@@ -5,6 +5,7 @@
     "author": "Видул Николаев Петров <vidul.petrov@gmail.com>",
     "license": "MIT",
     "main": "src/index.js",
+    "types": "index.d.ts",
     "keywords": [
         "converter",
         "words",
