@@ -1,9 +1,9 @@
 {
     "name": "nums2words-bg",
-    "version": "1.5.1",
+    "version": "1.5.3",
     "description": "Converts numbers to words in Bulgarian",
     "author": "Видул Николаев Петров <vidul.petrov@gmail.com>",
-    "license": "GPL v3.0",
+    "license": "MIT",
     "main": "src/index.js",
     "keywords": [
         "converter",
