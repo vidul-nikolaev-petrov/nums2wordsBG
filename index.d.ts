@@ -1,4 +1,7 @@
 declare module "nums2words-bg" {
+    /** Родове */
+    export type Gender = "m" | "f" | "n"; // мъжки, женски, среден
+
     /** Общи опции за граматика и разделители */
     export interface GrammarOptions {
         union?: string; // напр. "и"
@@ -7,7 +10,7 @@ declare module "nums2words-bg" {
 
     /** Основни опции за преобразуване на число в думи */
     export interface Num2WordsOptions {
-        gender?: "m" | "f" | "n"; // род
+        gender?: Gender;
         grammar?: GrammarOptions;
         separator?: string; // напр. ", "
     }
@@ -45,11 +48,15 @@ declare module "nums2words-bg" {
         labelSmall: string;
         singular: { lv: string; st: string };
         decimals: number;
-        def: { lv: "m" | "f" | "n"; st: "m" | "f" | "n" };
+        def: { lv: Gender | string; st: Gender | string };
         gender: Record<1 | 2, Record<string, string>>;
     }
 
     /** Основен интерфейс на библиотеката */
+    export interface CustomCurrencyMap {
+        [key: string]: CustomCurrency;
+    }
+
     export interface Num2WordsBG {
         (value: string, options?: Num2WordsOptions): string;
 
