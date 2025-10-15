@@ -150,3 +150,11 @@ nums2wordsBG.currency("11.01", { currency: "xyz" }, myCurrency);
 ## License
 
 Originally released under **GPLv3**, now relicensed under the **MIT License** as of **15.10.2025**.
+
+---
+
+## Support the Project
+
+If you like this library and want to support development, you can send Bitcoin donations to:
+
+**BTC:** `bc1qwjw068slek207haunc23jts7l260rq8785ghuc`. Thank you!
