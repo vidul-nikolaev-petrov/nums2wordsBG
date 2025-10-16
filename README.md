@@ -155,6 +155,6 @@ Originally released under **GPLv3**, now relicensed under the **MIT License** as
 
 ## Support the Project
 
-If you like this library and want to support development, you can send Bitcoin donations to:
+If you like this library and want to support the development, you can send Bitcoin donations to:
 
-**BTC:** `bc1qwjw068slek207haunc23jts7l260rq8785ghuc`. Thank you!
+`bc1qwjw068slek207haunc23jts7l260rq8785ghuc`
